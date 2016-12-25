@@ -27,8 +27,9 @@ class InputFuncs:
             return userInput
 
         except:
-            Logging.log('Error trying to parse number!')
+            Logging.log('Error trying to parse number! Using default fallback instead...')
             return defaultValue
+
 
 class RandomFuncs:
     def RandomIntStr(a: int, b):
@@ -49,3 +50,14 @@ class RandomFuncs:
             loopCount += 1
 
         Logging.log(result)
+
+class FileFuncs:
+    def CreateFile(fileName: str, extention):
+        if not fileName == '':
+            if not extention == '':
+                open('{}.{}'.format(fileName, extention), 'a')
+                Logging.log('Made file: {}.{}'.format(fileName, extention))
+            else:
+                Logging.log('The extention text cannot be blank!')
+        else:
+            Logging.log('The fileName text cannot be blank!')
