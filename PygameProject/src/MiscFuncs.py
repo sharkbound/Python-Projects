@@ -4,9 +4,10 @@ import gameHelper as game
 import math
 from enum import Enum
 
+
 class changeSetMode(Enum):
     manual = 1
-    setByScreenDimensions = 2
+    screen = 2
 
 
 class Misc:
@@ -86,19 +87,31 @@ class Misc:
         return color
 
     @staticmethod
-    def GetMaxChangeX(mode, value, division=4):
+    def GetMaxChangeX(mode, value, percent=0.005):
 
         if mode == changeSetMode.manual:
             return value
-        elif mode == changeSetMode.setByScreenDimensions:
+        elif mode == changeSetMode.screen:
             import Main
-            return Main.screenWidth / division
+            print('XChange after percent is applied: {}'.format(int(Main.screenWidth * percent)))
+            return int(Main.screenWidth * percent)
 
     @staticmethod
-    def GetMaxChangeY(mode, value, division=4):
+    def GetMaxChangeY(mode, value, percent=0.005):
 
         if mode == changeSetMode.manual:
             return value
-        elif mode == changeSetMode.setByScreenDimensions:
+        elif mode == changeSetMode.screen:
             import Main
-            return Main.screenHeight / division
+            print('YChange after percent is applied: {}'.format(int(Main.screenHeight * percent)))
+            return int(Main.screenHeight * percent)
+
+    @staticmethod
+    def GetCenterX():
+        import Main
+        return int(Main.screenWidth / 2)
+
+    @staticmethod
+    def GetCenterY():
+        import Main
+        return int(Main.screenHeight / 2)

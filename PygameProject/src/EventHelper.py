@@ -14,6 +14,9 @@ class EventParser:
             print('pygame.KEYUP')
             EventTriggerMethods.Event_Quit()
 
+        #if event.type == pygame.MOUSEMOTION:
+         #   print(event)
+
 class EventTriggerMethods:
     @staticmethod
     def Pre_Exit_Operations():
