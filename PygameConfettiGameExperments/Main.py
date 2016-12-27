@@ -2,15 +2,19 @@ from gameHelper import Setup, Renderer, ColorFuncs, CorePygameFuncs as Core
 from MiscFuncs import Misc, changeSetMode
 from EventHelper import EventParser
 from datetime import datetime
-from LoggingFuncs import log, delete_log_folder, create_log_folder
+from LoggingFuncs import log, delete_log_folder, create_log_folder, create_log_file
 
 import pygame
 
 pygame.init()
-delete_log_folder()
+
+# delete_log_folder()
+# create_log_folder()
+create_log_file()
+# get_files_in_dir('/logfile')
 
 screenWidth = 600  # 800
-screenHeight = 200  # 600
+screenHeight = 200  # 600f
 particleCount = 1000  # 400
 particle_width = 2
 particle_height = 2
