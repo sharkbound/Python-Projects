@@ -1,5 +1,6 @@
 import pygame
 
+
 class Renderer:
     @staticmethod
     def Update():
@@ -40,6 +41,9 @@ class ColorFuncs:
             'white': (255, 255, 255), 'red': (255, 0, 0), 'green': (0, 255, 0), 'blue': (0, 0, 255),
             'yellow': (240, 255, 0), 'black': (0, 0, 0)
         }
+
+    def test(*t):
+        return 1
 
     def __repr__(self):
         return str(ColorFuncs.GetColorList())

@@ -3,12 +3,11 @@ from gameHelper import Renderer
 import gameHelper as game
 import math
 from enum import Enum
-
+from datetime import datetime
 
 class changeSetMode(Enum):
     manual = 1
     screen = 2
-
 
 class Misc:
     @staticmethod
@@ -115,3 +114,11 @@ class Misc:
     def GetCenterY():
         import Main
         return int(Main.screenHeight / 2)
+
+    @staticmethod
+    def get_datetime_total_seconds(dt):
+        return (datetime.now() - dt).total_seconds()
+
+    @staticmethod
+    def get_datetime_seconds(dt):
+        return (datetime.now() - dt).seconds

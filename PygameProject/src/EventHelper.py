@@ -1,6 +1,7 @@
 import pygame
 from gameHelper import CorePygameFuncs as Core
 
+
 class EventParser:
     @staticmethod
     def ParseEvent(event):
@@ -14,13 +15,14 @@ class EventParser:
             print('pygame.KEYUP')
             EventTriggerMethods.Event_Quit()
 
-        #if event.type == pygame.MOUSEMOTION:
-         #   print(event)
+            # if event.type == pygame.MOUSEMOTION:
+            #   print(event)
+
 
 class EventTriggerMethods:
     @staticmethod
     def Pre_Exit_Operations():
-        print('Quitting Game...')
+        print('Message from Pre_Exit_Operations: \n\t Quitting game...')
 
     @staticmethod
     def Event_Quit():

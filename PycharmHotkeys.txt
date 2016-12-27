@@ -1,2 +1,6 @@
 Refactor/reorder code: alt+f8 or the code tab
+Refactor/reorder dialog: ctrl+shift+alt+L
+Rename Variable: shift+f6
 Run: control+f5
+Surround with: ctrl+alt+t
+Comment / uncomment selected lines: ctrl+/
