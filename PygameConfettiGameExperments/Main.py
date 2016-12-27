@@ -8,7 +8,6 @@ import pygame
 
 pygame.init()
 delete_log_folder()
-create_log_folder()
 
 screenWidth = 600  # 800
 screenHeight = 200  # 600
@@ -58,14 +57,18 @@ while Looping:
         yval = ylist[Index]
 
         if xval > screenWidth or xval <= 0:
-            log('\n\tPixel of index {} is out of bounds! \n\t\tY: {} \n\t\tX: {} [Out Of Bounds]\n'.format(Index, ylist[Index],
-                                                                                                 xlist[Index]))
+            log('\n\tPixel of index {} is out of bounds! \n\t\tY: {} \n\t\tX: {} [Out Of Bounds]\n'.format(
+                Index,
+                ylist[Index], xlist[Index]
+            ))
 
             xlist[Index] = Misc.GetCenterX()
 
         elif yval > screenHeight or yval <= 0:
-            log('\n\tPixel of index {} is out of bounds! \n\t\tY: {} [Out of bounds] \n\t\tX: {}\n'.format(Index, ylist[Index],
-                                                                                                 xlist[Index]))
+            log('\n\tPixel of index {} is out of bounds! \n\t\tY: {} [Out of bounds] \n\t\tX: {}\n'.format(
+                Index,
+                ylist[Index], xlist[Index]
+            ))
 
             ylist[Index] = Misc.GetCenterY()
 
