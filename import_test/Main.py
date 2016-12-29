@@ -12,11 +12,10 @@ def main_logger():
 
     logdir = log_file_dir
 
-    openfile(logdir, log=True)
-
     # print('Log file contents: \n{}'.format(getlogfilecontents()))
 
     log_info('Filler log line...', endl_mode=linemode.space2)
+    openfile(logdir, log=True)
 
     # values = list(getrange(2, includezero=False))
     # print(values)
@@ -32,5 +31,5 @@ def main_gui():
     gui.startgui()
 
 
-# main_logger()
-main_gui()
+main_logger()
+# main_gui()
