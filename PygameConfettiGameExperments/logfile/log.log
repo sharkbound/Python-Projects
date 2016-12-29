@@ -1,0 +1,485 @@
+INFO:root:[ 12/28/2016 16:22:44 ]: 
+	Pixel of index 774 is out of bounds! 
+		Y: 200.64690616446308 [Out of bounds] 
+		X: 304.42303181851173
+
+INFO:root:[ 12/28/2016 16:22:50 ]: 
+	Pixel of index 15 is out of bounds! 
+		Y: 136.8176271636113 
+		X: -0.7144157591256484 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:50 ]: 
+	Pixel of index 510 is out of bounds! 
+		Y: -0.09851636738670222 [Out of bounds] 
+		X: 201.92887501348912
+
+INFO:root:[ 12/28/2016 16:22:50 ]: 
+	Pixel of index 468 is out of bounds! 
+		Y: 163.04190133168964 
+		X: -2.014817596782595 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:51 ]: 
+	Pixel of index 970 is out of bounds! 
+		Y: 200.598157902899 [Out of bounds] 
+		X: 279.84029678952754
+
+INFO:root:[ 12/28/2016 16:22:52 ]: 
+	Pixel of index 214 is out of bounds! 
+		Y: 200.46312706484588 [Out of bounds] 
+		X: 267.6485854943284
+
+INFO:root:[ 12/28/2016 16:22:52 ]: 
+	Pixel of index 607 is out of bounds! 
+		Y: 105.5335243256533 
+		X: -2.400667325556267 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:53 ]: 
+	Pixel of index 758 is out of bounds! 
+		Y: -0.15560319756802143 [Out of bounds] 
+		X: 352.02570000464345
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 766 is out of bounds! 
+		Y: -0.23581998950936467 [Out of bounds] 
+		X: 216.58455517093267
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 925 is out of bounds! 
+		Y: 129.97112062880157 
+		X: 601.5597983953539 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 939 is out of bounds! 
+		Y: 96.18967631041775 
+		X: 600.3506177416492 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 5 is out of bounds! 
+		Y: 125.68950529256246 
+		X: 600.3229386871367 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 683 is out of bounds! 
+		Y: 65.37915857714933 
+		X: 600.0922398174453 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 433 is out of bounds! 
+		Y: 200.70813072253296 [Out of bounds] 
+		X: 321.39936318671545
+
+INFO:root:[ 12/28/2016 16:22:54 ]: 
+	Pixel of index 108 is out of bounds! 
+		Y: 93.04474320967414 
+		X: 600.9240507619326 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:55 ]: 
+	Pixel of index 74 is out of bounds! 
+		Y: 129.52622432196253 
+		X: 600.3507182084778 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:55 ]: 
+	Pixel of index 951 is out of bounds! 
+		Y: -0.5100791490784427 [Out of bounds] 
+		X: 394.3753230101588
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 599 is out of bounds! 
+		Y: -1.0581511114779318 [Out of bounds] 
+		X: 405.6797054979163
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 85 is out of bounds! 
+		Y: 46.537036027961086 
+		X: 602.1703678920006 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 814 is out of bounds! 
+		Y: 104.62657201958231 
+		X: 601.3641236622407 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 283 is out of bounds! 
+		Y: 200.91306022861994 [Out of bounds] 
+		X: 379.24405786856255
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 634 is out of bounds! 
+		Y: 200.49919114821256 [Out of bounds] 
+		X: 242.0759868385154
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 716 is out of bounds! 
+		Y: -0.28169081109024807 [Out of bounds] 
+		X: 359.20111088238366
+
+INFO:root:[ 12/28/2016 16:22:56 ]: 
+	Pixel of index 656 is out of bounds! 
+		Y: -0.10945052836661895 [Out of bounds] 
+		X: 273.3662004381279
+
+INFO:root:[ 12/28/2016 16:22:57 ]: 
+	Pixel of index 740 is out of bounds! 
+		Y: 115.3327514713915 
+		X: 603.3799139009063 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:57 ]: 
+	Pixel of index 689 is out of bounds! 
+		Y: 94.86921744528142 
+		X: -2.98292241329666 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 949 is out of bounds! 
+		Y: 115.10580542686074 
+		X: 604.2895384063709 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 921 is out of bounds! 
+		Y: 91.55189793583628 
+		X: 602.8737586473833 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 269 is out of bounds! 
+		Y: 105.56244794624162 
+		X: 602.1339388007452 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 186 is out of bounds! 
+		Y: 201.4868302828073 [Out of bounds] 
+		X: 286.1913637118988
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 924 is out of bounds! 
+		Y: 201.35975040495651 [Out of bounds] 
+		X: 202.22180216108322
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 378 is out of bounds! 
+		Y: -0.045055695928397976 [Out of bounds] 
+		X: 409.9096649507355
+
+INFO:root:[ 12/28/2016 16:22:58 ]: 
+	Pixel of index 439 is out of bounds! 
+		Y: 70.86698667125331 
+		X: -2.9380976946204487 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 612 is out of bounds! 
+		Y: 200.41251284036122 [Out of bounds] 
+		X: 368.82941834933365
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 846 is out of bounds! 
+		Y: -0.3284792985070111 [Out of bounds] 
+		X: 295.1138101335612
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 348 is out of bounds! 
+		Y: -0.7631742079507922 [Out of bounds] 
+		X: 535.3340636719685
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 395 is out of bounds! 
+		Y: -0.015194590637183453 [Out of bounds] 
+		X: 367.56926709991745
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 113 is out of bounds! 
+		Y: 72.45034362649474 
+		X: -0.43005553643642047 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 133 is out of bounds! 
+		Y: 200.33743660892944 [Out of bounds] 
+		X: 296.42820899508155
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 907 is out of bounds! 
+		Y: 47.14968655913839 
+		X: 602.2494125895338 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 261 is out of bounds! 
+		Y: 81.53727177860125 
+		X: -0.8093923097723428 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:22:59 ]: 
+	Pixel of index 791 is out of bounds! 
+		Y: 200.34977587480847 [Out of bounds] 
+		X: 244.55618867747893
+
+INFO:root:[ 12/28/2016 16:23:0 ]: 
+	Pixel of index 200 is out of bounds! 
+		Y: 29.69294777452761 
+		X: -0.9263774680049153 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:0 ]: 
+	Pixel of index 100 is out of bounds! 
+		Y: 155.70705222940944 
+		X: -3.177284189117846 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:0 ]: 
+	Pixel of index 830 is out of bounds! 
+		Y: 121.72210928009929 
+		X: 601.4321764945382 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:0 ]: 
+	Pixel of index 889 is out of bounds! 
+		Y: 165.90124474156497 
+		X: 601.2050711808533 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:0 ]: 
+	Pixel of index 59 is out of bounds! 
+		Y: -0.9209152211225413 [Out of bounds] 
+		X: 398.7058793005035
+
+INFO:root:[ 12/28/2016 16:23:1 ]: 
+	Pixel of index 960 is out of bounds! 
+		Y: -0.7963738719945874 [Out of bounds] 
+		X: 362.2824848420476
+
+INFO:root:[ 12/28/2016 16:23:1 ]: 
+	Pixel of index 964 is out of bounds! 
+		Y: 132.6424381331928 
+		X: -2.129892594758765 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:1 ]: 
+	Pixel of index 720 is out of bounds! 
+		Y: 90.57288620859102 
+		X: -0.5954508175826403 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:1 ]: 
+	Pixel of index 997 is out of bounds! 
+		Y: -0.08841568440281677 [Out of bounds] 
+		X: 237.04500548842853
+
+INFO:root:[ 12/28/2016 16:23:1 ]: 
+	Pixel of index 788 is out of bounds! 
+		Y: 158.00449729918344 
+		X: 600.175189801867 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 585 is out of bounds! 
+		Y: 72.24452755743528 
+		X: -1.408204537317601 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 508 is out of bounds! 
+		Y: 112.10200564049484 
+		X: 600.3330803735005 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 330 is out of bounds! 
+		Y: -0.05474974296404178 [Out of bounds] 
+		X: 359.10824099556305
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 794 is out of bounds! 
+		Y: 201.17035248376953 [Out of bounds] 
+		X: 229.78123296117263
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 259 is out of bounds! 
+		Y: 47.49867856781205 
+		X: 600.3342246789 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 525 is out of bounds! 
+		Y: 98.11134535258617 
+		X: -1.1998998103680818 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:2 ]: 
+	Pixel of index 954 is out of bounds! 
+		Y: 141.42493435644653 
+		X: 600.0299044205665 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 420 is out of bounds! 
+		Y: 201.276464553032 [Out of bounds] 
+		X: 215.89147712289807
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 293 is out of bounds! 
+		Y: -1.651580485382788 [Out of bounds] 
+		X: 166.94754373907134
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 14 is out of bounds! 
+		Y: -0.009988482122179398 [Out of bounds] 
+		X: 361.0512436168542
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 83 is out of bounds! 
+		Y: 56.37346508643098 
+		X: 601.5050236627109 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 488 is out of bounds! 
+		Y: 201.820794831241 [Out of bounds] 
+		X: 265.32547376510485
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 22 is out of bounds! 
+		Y: 77.92447718612738 
+		X: 601.0758672626512 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:3 ]: 
+	Pixel of index 335 is out of bounds! 
+		Y: 102.77628192283966 
+		X: -1.088953619680348 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 455 is out of bounds! 
+		Y: 126.76763834523956 
+		X: -0.8806104878292347 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 4 is out of bounds! 
+		Y: -0.3609582173056971 [Out of bounds] 
+		X: 240.1567493146373
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 358 is out of bounds! 
+		Y: -0.7916966355540234 [Out of bounds] 
+		X: 192.59896338607575
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 383 is out of bounds! 
+		Y: 157.6649516599448 
+		X: 603.6052359365801 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 895 is out of bounds! 
+		Y: 101.65925246072051 
+		X: 602.4418497286396 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 503 is out of bounds! 
+		Y: -0.22151173389826329 [Out of bounds] 
+		X: 321.6648021292564
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 843 is out of bounds! 
+		Y: 200.38542739612888 [Out of bounds] 
+		X: 314.2459004844977
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 692 is out of bounds! 
+		Y: 200.6867477339266 [Out of bounds] 
+		X: 263.0164030682812
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 116 is out of bounds! 
+		Y: -0.5624075779075558 [Out of bounds] 
+		X: 167.1136007433247
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 972 is out of bounds! 
+		Y: 55.157229432752374 
+		X: -2.9467975773634354 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:4 ]: 
+	Pixel of index 476 is out of bounds! 
+		Y: 77.30977344235734 
+		X: -4.909348372416867 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 975 is out of bounds! 
+		Y: 109.58815618482227 
+		X: 604.6594942956402 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 558 is out of bounds! 
+		Y: 200.08541711307632 [Out of bounds] 
+		X: 277.1634392762962
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 122 is out of bounds! 
+		Y: -0.13737518351188105 [Out of bounds] 
+		X: 286.9050094116759
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 456 is out of bounds! 
+		Y: 61.68402932522514 
+		X: -3.649216170735325 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 129 is out of bounds! 
+		Y: -1.3441934085561578 [Out of bounds] 
+		X: 317.21755454412545
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 207 is out of bounds! 
+		Y: 200.72957304969188 [Out of bounds] 
+		X: 334.9881344313125
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 454 is out of bounds! 
+		Y: -0.8394117391983371 [Out of bounds] 
+		X: 330.1100038614614
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 694 is out of bounds! 
+		Y: 200.39107694409378 [Out of bounds] 
+		X: 284.44406593425254
+
+INFO:root:[ 12/28/2016 16:23:5 ]: 
+	Pixel of index 132 is out of bounds! 
+		Y: -0.6908924707698286 [Out of bounds] 
+		X: 415.00880195075695
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 601 is out of bounds! 
+		Y: 200.47891547121162 [Out of bounds] 
+		X: 468.0123679504822
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 609 is out of bounds! 
+		Y: -0.09520866138708572 [Out of bounds] 
+		X: 422.9006609772075
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 184 is out of bounds! 
+		Y: 113.37470162935233 
+		X: -3.87381893892974 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 961 is out of bounds! 
+		Y: -0.5198613602210505 [Out of bounds] 
+		X: 264.44428466858557
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 490 is out of bounds! 
+		Y: 62.86490739823286 
+		X: -2.2518826701331998 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:6 ]: 
+	Pixel of index 173 is out of bounds! 
+		Y: 53.10141751730855 
+		X: 601.1341165697795 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:7 ]: 
+	Pixel of index 708 is out of bounds! 
+		Y: 167.51744838417798 
+		X: 603.055681478052 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:7 ]: 
+	Pixel of index 688 is out of bounds! 
+		Y: 103.7347563959037 
+		X: -0.048063207281842324 [Out Of Bounds]
+
+INFO:root:[ 12/28/2016 16:23:7 ]: 
+	Pixel of index 438 is out of bounds! 
+		Y: -0.43840220090448256 [Out of bounds] 
+		X: 407.74856175341927
+
+INFO:root:[ 12/28/2016 16:23:7 ]: 
+	Pixel of index 450 is out of bounds! 
+		Y: -1.498223833006811 [Out of bounds] 
+		X: 465.61129428457394
+
+INFO:root:[ 12/28/2016 21:13:37 ]: 
+	Pixel of index 567 is out of bounds! 
+		Y: 200.0256676082585 [Out of bounds] 
+		X: 296.91064888976706
+

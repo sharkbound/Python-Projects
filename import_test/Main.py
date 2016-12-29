@@ -1,23 +1,22 @@
-import logger
+from enum_classes import linemode
 import gui_funcs as gui
-
-from enum_classes import LineMode
-from logger import log_info, createlogfile, deletelogdir, getlogfilecontents
 from enum_classes import GuiTextMode as text
-from miscfuncs import getrange
+from logger import *
+from miscfuncs import *
+from filefuncs import *
 
 
 def main_logger():
-    logger.clearlogs()
+    clearlogs()
     createlogfile()
 
-    logdir = logger.log_file_dir  # logger.log_file_dir.replace('/', '\\')
+    logdir = log_file_dir
 
-    # file.open(r'logs\log.log', log=True)
+    openfile(logdir, log=True)
 
-    print('Log file contents: \n{}'.format(getlogfilecontents()))
+    # print('Log file contents: \n{}'.format(getlogfilecontents()))
 
-    log_info('testing log function', endl_mode=LineMode.space2)
+    log_info('Filler log line...', endl_mode=linemode.space2)
 
     # values = list(getrange(2, includezero=False))
     # print(values)

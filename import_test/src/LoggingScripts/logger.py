@@ -3,7 +3,7 @@ import os
 import shutil
 import logging
 
-from enum_classes import LineMode
+from enum_classes import linemode
 from datetime import datetime
 
 log_dir = 'logs'
@@ -11,10 +11,10 @@ log_file_dir = r'logs\log.log'
 log_file_name = 'log.log'
 
 
-def log_info(msg, file=log_file_dir, endl_mode=LineMode.newlinetab):
+def log_info(msg, file=log_file_dir, endl_mode=linemode.newlinetab1, beforeprefixtab=False):
     createlogdir()
     logging.basicConfig(filename=file, level=logging.INFO)
-    logging.log(logging.INFO, _get_prefix(add_tab=False, endlinemode=endl_mode) + msg)
+    logging.log(logging.INFO, _get_prefix(add_tab=beforeprefixtab, endlinemode=endl_mode) + msg)
 
 
 def createlogdir():
@@ -49,7 +49,7 @@ def deletelogfile():
         os.remove(log_file_dir)
 
 
-def _get_prefix(add_tab=True, endlinemode=LineMode.newlinetab):
+def _get_prefix(add_tab=True, endlinemode=linemode.newlinetab1):
     now = datetime.now()
     params = [now.month, now.day, now.year, now.hour, now.minute, now.time().second]
     prefix = ''
@@ -64,21 +64,21 @@ def _get_prefix(add_tab=True, endlinemode=LineMode.newlinetab):
 
 
 def _append_endline(prefix, mode):
-    if mode == LineMode.newlinetab:
+    if mode == linemode.newlinetab1:
         prefix += '\n\t'
-    elif mode == LineMode.newline:
+    elif mode == linemode.newline:
         prefix += '\n'
-    elif mode == LineMode.newlinetab2:
+    elif mode == linemode.newlinetab2:
         prefix += '\n\t\t'
-    elif mode == LineMode.tab1:
+    elif mode == linemode.tab1:
         prefix += '\t'
-    elif mode == LineMode.tab2:
+    elif mode == linemode.tab2:
         prefix += '\t\t'
-    elif mode == LineMode.space1:
+    elif mode == linemode.space1:
         prefix += ' '
-    elif mode == LineMode.space2:
+    elif mode == linemode.space2:
         prefix += '  '
-    elif mode == LineMode.space3:
+    elif mode == linemode.space3:
         prefix += '   '
 
     return prefix

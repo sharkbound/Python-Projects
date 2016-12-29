@@ -24,6 +24,7 @@ def get_child_dirs(dir):
 def log_dir_exist():
     return exists(get_log_directory_complete())
 
+
 def log_file_exist():
     return exists(get_log_file_path_complete())
 

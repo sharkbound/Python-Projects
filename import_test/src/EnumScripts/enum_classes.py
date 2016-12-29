@@ -1,9 +1,9 @@
 from enum import Enum
 
 
-class LineMode(Enum):
+class linemode(Enum):
     nothing = 1
-    newlinetab = 2
+    newlinetab1 = 2
     newline = 3
     tab1 = 4
     tab2 = 5

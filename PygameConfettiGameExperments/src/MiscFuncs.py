@@ -5,9 +5,11 @@ import math
 from enum import Enum
 from datetime import datetime
 
+
 class changeSetMode(Enum):
     manual = 1
     screen = 2
+
 
 class Misc:
     @staticmethod

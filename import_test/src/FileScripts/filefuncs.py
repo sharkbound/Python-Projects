@@ -1,7 +1,7 @@
 import os
 
 
-def open(file, log=False):
+def openfile(file, log=False):
     if os.path.exists(file):
         try:
             os.startfile(file)
