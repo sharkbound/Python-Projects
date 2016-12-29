@@ -2,6 +2,7 @@ import os
 from logger import log_file_dir
 import subprocess
 from subprocess import check_output
+from logger import prefixlogdir
 
 
 def openfile(file, log=False):
@@ -15,10 +16,11 @@ def openfile(file, log=False):
         print('File "{}" does not exist!'.format(file))
 
 
-def openlogfile():
+def openlogfile(file=log_file_dir):
     # notepadproc = openfile(log_file_dir, log=True)
     # print(notepadproc)
-    openfile(log_file_dir, log=True)
+    file=prefixlogdir(file)
+    openfile(file, log=True)
 
 
 def killproc(procname):

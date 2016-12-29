@@ -1,4 +1,3 @@
-from enum_classes import linemode
 import gui_funcs as gui
 from enum_classes import GuiTextMode as text
 from logger import *
@@ -10,14 +9,31 @@ def main_logger():
     # clearlogs()
     # createlogfile()
 
-    logdir = log_file_dir
+    # logs = ['jim.log', 'bob.log', 'billy.log']
+    logs = ['log.logsdfasfaf']
+    index = 0
 
-    log_i('Filler log line...')
-    log_i('Filler log line...')
+    for log in logs:
+        prefixed = log
+        log_i('Log file name pre-prefix: "{}" '.format(prefixed), file=prefixed)
+        prefixed = prefixlogdir(log)
+        logs[index] = prefixed
+        log_i('Log file name post-prefix: "{}" '.format(prefixed), file=prefixed)
+        index += 1
 
-    openlogfile()
-    sleep(2)
-    deletelogdir(log=False)
+    # openlogfile(file='log.log')
+    # openlogfile()
+
+    for log in logs:
+        openlogfile(log)
+
+    sleep(3)
+
+    # deletelogfile()
+    # deletelogdir(log=False)
+    # deletelogfile(file=log1)
+    # deletelogfile(file=log2)
+    deletelogdir(log=True, safemode=False)
 
 
 def main_gui():
