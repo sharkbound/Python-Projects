@@ -7,27 +7,23 @@ from filefuncs import *
 
 
 def main_logger():
-    clearlogs()
-    createlogfile()
+    # clearlogs()
+    # createlogfile()
 
     logdir = log_file_dir
 
-    # print('Log file contents: \n{}'.format(getlogfilecontents()))
+    log_i('Filler log line...')
+    log_i('Filler log line...')
 
-    log_info('Filler log line...', endl_mode=linemode.space2)
-    openfile(logdir, log=True)
-
-    # values = list(getrange(2, includezero=False))
-    # print(values)
-
-    print('\nTrying to delete log directory...')
-    deletelogdir(log=True)
+    openlogfile()
+    sleep(2)
+    deletelogdir(log=False)
 
 
 def main_gui():
     gui.set_title('new title')
     gui.addtext_pack('testing text')
-    gui.addtext_pack('testing again :D')
+    gui.addtext_pack('testing \nagain \n:D')
     gui.startgui()
 
 

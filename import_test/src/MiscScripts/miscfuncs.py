@@ -1,3 +1,5 @@
+import time
+
 def getrange(start, stop=None, step=1, includezero=False):
     if stop == None:
         # if start == 1 and stop == None:
@@ -20,3 +22,7 @@ def getrange(start, stop=None, step=1, includezero=False):
 
     else:
         return range(start, stop + 1, step)
+
+
+def sleep(sleepseconds):
+    time.sleep(sleepseconds)

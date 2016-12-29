@@ -11,10 +11,18 @@ log_file_dir = r'logs\log.log'
 log_file_name = 'log.log'
 
 
-def log_info(msg, file=log_file_dir, endl_mode=linemode.newlinetab1, beforeprefixtab=False):
-    createlogdir()
-    logging.basicConfig(filename=file, level=logging.INFO)
-    logging.log(logging.INFO, _get_prefix(add_tab=beforeprefixtab, endlinemode=endl_mode) + msg)
+# def log_info(msg, file=log_file_dir, endl_mode=linemode.newlinetab1, beforeprefixtab=False):
+#     createlogdir()
+#     logging.basicConfig(filename=file, level=logging.INFO)
+#     logging.log(logging.INFO, _get_prefix(add_tab=beforeprefixtab, endlinemode=endl_mode) + msg)
+
+
+def log_i(msg, file=log_file_dir):
+    createlogfile()
+    compmsg = _get_datetime_prefix() + ' [INFO]: ' + msg + '\n'
+    lf = open(file, 'a')
+    lf.writelines(compmsg)
+    lf.close()
 
 
 def createlogdir():
@@ -44,44 +52,44 @@ def deletelogdir(log=False):
                 except Exception as e:
                     print('\nSomething went wrong trying to delete the log directory! \n\tDetails: \n\t{}'.format(e))
 
+
 def deletelogfile():
     if logfileexist():
         os.remove(log_file_dir)
 
 
-def _get_prefix(add_tab=True, endlinemode=linemode.newlinetab1):
+def _get_datetime_prefix():
     now = datetime.now()
     params = [now.month, now.day, now.year, now.hour, now.minute, now.time().second]
     prefix = ''
-
-    if add_tab:
-        prefix = '\t[{}/{}/{} {}:{}:{}]:'.format(*params)
-    else:
-        prefix = '[{}/{}/{} {}:{}:{}]:'.format(*params)  # now.month, now.day, now.year, now.hour, now.minute)
-
-    prefix = _append_endline(prefix, endlinemode)
+    prefix = '[{}/{}/{} {}:{}:{}]'.format(*params)
     return prefix
 
 
-def _append_endline(prefix, mode):
+def _get_endl(endlinemode=linemode.space2):
+    prefix = _append_endline(endlinemode)
+    return prefix
+
+
+def _append_endline(mode, text=''):
     if mode == linemode.newlinetab1:
-        prefix += '\n\t'
+        text += '\n\t'
     elif mode == linemode.newline:
-        prefix += '\n'
+        text += '\n'
     elif mode == linemode.newlinetab2:
-        prefix += '\n\t\t'
+        text += '\n\t\t'
     elif mode == linemode.tab1:
-        prefix += '\t'
+        text += '\t'
     elif mode == linemode.tab2:
-        prefix += '\t\t'
+        text += '\t\t'
     elif mode == linemode.space1:
-        prefix += ' '
+        text += ' '
     elif mode == linemode.space2:
-        prefix += '  '
+        text += '  '
     elif mode == linemode.space3:
-        prefix += '   '
+        text += '   '
 
-    return prefix
+    return text
 
 
 def getlogfilecontents():
@@ -91,14 +99,17 @@ def getlogfilecontents():
         file.close()
         return contents
 
+
 def getlogfile():
     if logfileexist():
         return open(log_file_dir, 'w')
     else:
         return None
 
+
 def logfileexist():
     return os.path.exists(log_file_dir)
+
 
 def clearlogs():
     deletelogfile()
