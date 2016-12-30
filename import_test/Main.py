@@ -10,7 +10,7 @@ def main_logger():
     # createlogfile()
 
     # logs = ['jim.log', 'bob.log', 'billy.log']
-    logs = ['log.logsdfasfaf']
+    logs = ['log_for_noobs.log']
     index = 0
 
     for log in logs:
