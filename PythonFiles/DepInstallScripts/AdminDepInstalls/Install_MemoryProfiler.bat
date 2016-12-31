@@ -1,0 +1,2 @@
+pip install memory_profiler
+pause

@@ -7,3 +7,4 @@ Comment / uncomment selected lines: ctrl+/
 Open a file in explorer: ctrl+alt+f12
 Search everything: press shift twice
 Symbol search: ctrl+alt+shift+n
+Open settings: alt + f7
