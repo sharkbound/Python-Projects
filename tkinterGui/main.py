@@ -1,8 +1,9 @@
-import gui_util, time, itertools
+import time, guiTool, tkinter
 
+from tkinter import Button
 from memoryutils import *
 
-gui = gui_util
+gui = guiTool
 
 
 def main():
@@ -10,7 +11,7 @@ def main():
     printmemory()
 
     gui.set_width_height(200, 200)
-    gui.addbtn("button name")
+    gui.addbtn("PIE")
     gui.set_title("Test title")
     gui.addtxt("testing test")
     gui.addchkbtn("checkbutton text")
