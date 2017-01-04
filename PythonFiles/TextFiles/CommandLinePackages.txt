@@ -1,0 +1,5 @@
+pip install --user clint  //aperently a powerful python command line utility
+
+pip install --user click  // dont really know any about this python command line utility
+
+pip install --user compago  // makes setting up commands really easy using a decorator
