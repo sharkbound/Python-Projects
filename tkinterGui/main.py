@@ -4,8 +4,6 @@ from memoryutils import *
 from misc import rep_func as rep
 from colorlogger import log_warning, colors as c, log_crit, log_info, log, log_highlight
 
-# from colors import bcolors as color
-
 gui = guiTool
 
 

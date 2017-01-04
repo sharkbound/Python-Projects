@@ -1,0 +1,1 @@
+start %AppData%\Python\Python36
