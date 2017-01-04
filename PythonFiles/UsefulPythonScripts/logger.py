@@ -14,24 +14,23 @@ log_file_name = 'log.log'
 
 # prefixes filesname with logs\ if it doesnt already have in the name, unlike logtofile()
 # which does not add the log directory as a file path prefix
-def log(msg, file=log_file_dir, tag=' [INFO]: ', consolelog=True):
+def log(msg, file=log_file_dir, tag=' [INFO]:  ', consolelog=True):
     file = prefixlogdir(file)
     createlogfile(file=file)
-    compmsg = _get_datetime_prefix() + tag + msg + '\n'
-    lf = open(file, 'a')
-    lf.writelines(compmsg)
-    lf.close()
+
+    with open(file, 'a') as lf:
+        lf.writelines(_get_datetime_prefix() + tag + msg + '\n')
+
     if consolelog:
-        print('Added text: "{}" to file: "{}"'.format(msg, file))
+        print(f'Added text: "{msg}" to file: "{file}"')
 
 
 # logtofile does not prefix the filename with logs\ like log() does
-def logtofile(msg, file=log_file_dir, tag=' [INFO]: '):
+def logtofile(msg, file=log_file_dir, tag=' [INFO]:  '):
     createlogdir()
-    compmsg = _get_datetime_prefix() + tag + msg + '\n'
-    lf = open(file, 'a')
-    lf.writelines(compmsg)
-    lf.close()
+
+    with open(file, 'a') as lf:
+        lf.writelines(_get_datetime_prefix() + tag + msg + '\n')
 
 
 def createlogdir():
@@ -68,21 +67,20 @@ def deletelogdir(safemode=True, log=False):
                             print('Deleted log directory!')
                     except Exception as e:
                         print(
-                            '\nSomething went wrong trying to delete the log directory! \n\tDetails: \n\t{}'.format(e))
+                            f'\nSomething went wrong trying to delete the log directory! \n\tDetails: \n\t{e}')
                 else:
                     if log:
-                        print('Not deleting log dir because file name is {} and not log.log'.format(files[0]))
+                        print(f'Not deleting log dir because file name is {files[0]} and not log.log')
             else:
                 if log:
-                    print('Not deleting log dir because file count is: {}, and dir count is: {}'.format(len(files),
-                                                                                                        len(dirs)))
+                    print(f'Not deleting log dir because file count is: {len(files)}, and dir count is: {len(dirs)}')
         else:
             try:
                 shutil.rmtree(log_dir)
                 if log:
                     print('Deleted log directory!')
             except Exception as e:
-                print('\nSomething went wrong trying to delete the log directory! \n\tDetails: \n\t{}'.format(e))
+                print(f'\nSomething went wrong trying to delete the log directory! \n\tDetails: \n\t{e}')
 
 
 def deletelogfile(file=log_file_dir):
@@ -93,10 +91,7 @@ def deletelogfile(file=log_file_dir):
 
 def _get_datetime_prefix():
     now = datetime.now()
-    params = [now.month, now.day, now.year, now.hour, now.minute, now.time().second]
-    prefix = ''
-    prefix = '[{}/{}/{} {}:{}:{}]'.format(*params)
-    return prefix
+    return  f'[{now.month}/{now.day}/{now.year} {now.hour}:{now.minute}:{now.second}]'
 
 
 def getlogfilecontents():
