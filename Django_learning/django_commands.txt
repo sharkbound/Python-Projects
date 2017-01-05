@@ -1,0 +1,6 @@
+django-admin startproject mysite  //creates the website project files
+python manage.py runserver //runs server
+python manage.py runserver (optional port) //runs server with the specified port
+python manage.py startapp mainpage //creates a project app
+python manage.py makemigrations //creates migrations
+python manage.py migrate //migrates something... lol (needed to run right)
