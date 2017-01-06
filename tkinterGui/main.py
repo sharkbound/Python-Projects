@@ -1,8 +1,5 @@
-import time, guiTool, tkinter, misc
-from tkinter import Button
+import time, guiTool
 from memoryutils import *
-from misc import rep_func as rep
-from colorlogger import log_warning, colors as c, log_crit, log_info, log, log_highlight
 
 gui = guiTool
 
@@ -19,13 +16,12 @@ def GUI():
     gui.addchkbtn("checkbutton text")
     gui.mainloop()
 
-
 def main():
     t1 = time.clock()
 
     printmemory()
 
-    GUI()
+    # GUI()
 
     t2 = time.clock()
     print(f'Execution time: \n\t{t2-t1}')
