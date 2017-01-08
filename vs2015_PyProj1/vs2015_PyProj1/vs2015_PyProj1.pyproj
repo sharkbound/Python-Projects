@@ -3,15 +3,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6a5775c1-3cd0-4bc6-b341-70f6c947f740</ProjectGuid>
+    <ProjectGuid>36611d37-856e-4ae7-a516-111a8f394702</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonTest.py</StartupFile>
+    <StartupFile>vs2015_PyProj1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>PythonTest</Name>
-    <RootNamespace>PythonTest</RootNamespace>
+    <Name>vs2015_PyProj1</Name>
+    <RootNamespace>vs2015_PyProj1</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>{dc3bcf50-aa9d-4856-9fff-1e906de49f86}</InterpreterId>
+    <InterpreterVersion>3.5</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,10 +25,16 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Methods.py">
+    <Compile Include="misc\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PythonTest.py" />
+    <Compile Include="vs2015_PyProj1.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="misc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{dc3bcf50-aa9d-4856-9fff-1e906de49f86}\3.5" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

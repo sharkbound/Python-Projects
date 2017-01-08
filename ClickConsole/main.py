@@ -1,6 +1,6 @@
 import click, colorama
 
-from colorama import Fore as f, Back as b
+from colorama import Fore, Back
 from src import logger
 
 
@@ -9,7 +9,7 @@ from src import logger
 @click.option('-count', default=1, help='The count of times it says hello')
 def hello(name, count):
     for x in range(count):
-        msg = f'{f.BLUE+b.RED}Hello {name}! I have said hello to you {x+1} times!'
+        msg = f'{Fore.BLUE+Back.RED}Hello {name}! I have said hello to you {x+1} times!'
         print(msg)
 
 
