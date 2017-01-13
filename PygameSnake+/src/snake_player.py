@@ -1,6 +1,8 @@
 from enum import Enum
-
+from pygame.math import Vector2
 import pygame
+
+# from main import player
 
 
 class Position:
@@ -18,11 +20,14 @@ class MoveDirection(Enum):
 
 class Player:
     def __init__(self, start_x, start_y, x_limit, y_limit):
-        self.position = Position(start_x, start_y)
+        # self.position = Position(start_x, start_y)
+        self.position = Vector2()
+        self.position.x, self.position.y = start_x, start_y
         self.x_limit = x_limit
         self.y_limit = y_limit
+        self.next_position = (0, 0)
 
-    def _check_if_in_bounds(self):
+    def check_if_in_bounds(self):
         if self.position.x < 0:
             self.position.x = self.x_limit
 
@@ -48,11 +53,14 @@ class Player:
         elif direction == MoveDirection.right:
             self.position.x += change
 
-        self._check_if_in_bounds()
+        self.check_if_in_bounds()
         # print(f'Player x: {self.position.x}, Player y: {self.position.y}')
 
+    # def move_to_next_position(self, time):
+    #     player.position = Vector2.lerp(player.position, player.next_position, time)
+
     @staticmethod
-    def return_moved_player(pos, move_dir, change = 5):
+    def return_moved_player(pos, move_dir, change=5):
         if move_dir == MoveDirection.up:
             pos.y -= change
 

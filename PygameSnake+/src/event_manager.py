@@ -1,4 +1,5 @@
-from pygame import QUIT, KEYDOWN, KEYUP
+# from pygame import QUIT, KEYDOWN, KEYUP
+from pygame import *
 from snake_player import MoveDirection as move
 
 import pygame, sys
@@ -28,15 +29,17 @@ class EventParser:
         if event.type != pygame.KEYDOWN:
             return last_dir
 
-        key_name = pygame.key.name(event.key)
-        if key_name == 'w' or key_name == 'up':
+        if event.key == K_w or event.key == K_UP:
             return move.up
 
-        elif key_name == 's' or key_name == 'down':
+        elif event.key == K_s or event.key == K_DOWN:
             return move.down
 
-        elif key_name == 'a' or key_name == 'left':
+        elif event.key == K_a or event.key == K_LEFT:
             return move.left
 
-        elif key_name == 'd' or key_name == 'right':
+        elif event.key == K_d or event.key == K_RIGHT:
             return move.right
+
+        else:
+            return last_dir
