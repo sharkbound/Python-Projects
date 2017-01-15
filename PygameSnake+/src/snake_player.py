@@ -11,6 +11,9 @@ class Position:
         self.x = x
         self.y = y
 
+    def __add__(self, other):
+        return Position(self.x + other.x, self.y + other.y)
+
 
 class MoveDirection(Enum):
     up = 1
@@ -32,7 +35,7 @@ class Player:
         self.position.x, self.position.y = start_x, start_y
         self.x_limit = x_limit
         self.y_limit = y_limit
-        self.next_position = (0, 0)
+        self.next_position = (0, 0)  # Position(0, 0)
         self.tail_segments = []
         self.hitbox_rect = pygame.Rect(start_x, start_y, player_size[0], player_size[1])
         self.screen = screen
@@ -72,22 +75,6 @@ class Player:
     # def move_to_next_position(self, time):
     #     player.position = Vector2.lerp(player.position, player.next_position, time)
 
-    @staticmethod
-    def return_moved_player(pos, move_dir, change=5):
-        if move_dir == MoveDirection.up:
-            pos.y -= change
-
-        elif move_dir == MoveDirection.down:
-            pos.y += change
-
-        elif move_dir == MoveDirection.left:
-            pos.x -= change
-
-        elif move_dir == MoveDirection.right:
-            pos.x += change
-
-        return pos
-
     def add_to_tail(self, move_direction, offset_amount=2):
         last_segment = None
         if self.get_tail_length() == 0:
@@ -117,7 +104,7 @@ class Player:
 
     def move_last_tail_to_front(self, move_direction, offset_amount=2, debug=False):
         if len(self.tail_segments) == 0: return
-        t_piece = self.tail_segments[len(self.tail_segments) - 1]
+        t_piece = self.get_last_tail_segment()
         search_spot = self.hitbox_rect
 
         if move_direction == MoveDirection.up:
@@ -170,3 +157,13 @@ class Player:
 
     def get_tail_length(self):
         return len(self.tail_segments)
+
+    # @staticmethod
+    # def return_moved_player(pos, move_dir, move_dict, change=5):
+    #     if move_dir == MoveDirection.up or move_dir == MoveDirection.down:
+    #         pos.y += move_dict[move_dir]
+    #
+    #     elif move_dir == MoveDirection.left or move_dir == MoveDirection.right:
+    #         pos.x += move_dict[move_dir]
+    #
+    #     return pos

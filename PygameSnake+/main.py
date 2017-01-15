@@ -4,14 +4,13 @@ import colors as color
 
 from guihelper import Gui
 from event_manager import EventParser
-from snake_player import Player, MoveDirection as MoveDir, TailPiece
+from snake_player import Player, MoveDirection as MoveDir, TailPiece, Position
 from apple import Apple
 from pygame.math import Vector2
 
 # region Variables
 screen_size = (400, 400)
 screen_middle = (screen_size[0] / 2, screen_size[1] / 2)
-movement_distance = 0.8
 in_game = False
 debug_mode = False
 last_dir = MoveDir.down
@@ -22,6 +21,16 @@ player_size = (10, 10)
 player_hitbox_size = (10, 10)
 apple_size = (20, 20)
 last_appended_tailpiece = None
+tail_placement_offset = 12
+tail_placement_offset_dict = {MoveDir.up: tail_placement_offset, MoveDir.down: -tail_placement_offset,
+                              MoveDir.left: tail_placement_offset, MoveDir.right: -tail_placement_offset}
+movement_distance = 0.8
+player_movement_vect2_dict = {MoveDir.up: Vector2(2, -movement_distance),
+                              MoveDir.down: Vector2(0, movement_distance),
+                              MoveDir.left: Vector2(-movement_distance, 0),
+                              MoveDir.right: Vector2(movement_distance, 0)}
+player_movement_raw_dict = {MoveDir.up: -movement_distance, MoveDir.down: movement_distance,
+                            MoveDir.left: -movement_distance, MoveDir.right: movement_distance}
 
 gui = Gui(pygame.display.set_mode(screen_size))
 parser = EventParser()
@@ -56,7 +65,8 @@ while not in_game:
     # endregion
 
     # region player logic
-    player.next_position = Player.return_moved_player(player.position, last_dir, change=movement_distance)
+    player.next_position = player.position + player_movement_vect2_dict[
+        last_dir]  # Player.return_moved_player(player.position, last_dir, player_movement_raw_dict, change=movement_distance)
     player.position = Vector2.lerp(player.position, player.next_position, movement_lerp_time)
     player.check_if_in_bounds()
     player.move_last_tail_to_front(last_dir, offset_amount=12, debug=debug_mode)
