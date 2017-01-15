@@ -1,6 +1,6 @@
 from enum import Enum
 from pygame.math import Vector2
-import pygame
+import pygame, colors as color
 
 
 # from main import player
@@ -20,21 +20,22 @@ class MoveDirection(Enum):
 
 
 class TailPiece:
-    def __init__(self, offset_x, offset_y, x=0, y=0):
-        self.offset = Position(offset_x, offset_y)
+    def __init__(self, x=0, y=0):  # , offset_x, offset_y
+        # self.offset = Position(offset_x, offset_y)
         self.pos = Position(x, y)
 
 
 class Player:
-    def __init__(self, start_x, start_y, x_limit, y_limit, player_size):
+    def __init__(self, start_x, start_y, x_limit, y_limit, player_size, screen=None):
         # self.position = Position(start_x, start_y)
         self.position = Vector2()
         self.position.x, self.position.y = start_x, start_y
         self.x_limit = x_limit
         self.y_limit = y_limit
         self.next_position = (0, 0)
-        self.tail_pieces = []
+        self.tail_segments = []
         self.hitbox_rect = pygame.Rect(start_x, start_y, player_size[0], player_size[1])
+        self.screen = screen
 
     def check_if_in_bounds(self):
         if self.position.x < 0:
@@ -88,57 +89,84 @@ class Player:
         return pos
 
     def add_to_tail(self, move_direction, offset_amount=2):
+        last_segment = None
+        if self.get_tail_length() == 0:
+            last_segment = TailPiece(self.position.x, self.position.y)
+        else:
+            last_segment = self.get_last_tail_segment()
+
         if move_direction == MoveDirection.up:
-            self.tail_pieces.append(
-                TailPiece(offset_y=offset_amount, offset_x=0)
+            self.tail_segments.append(
+                TailPiece(last_segment.pos.x, last_segment.pos.y + offset_amount)
             )
 
         elif move_direction == MoveDirection.down:
-            self.tail_pieces.append(
-                TailPiece(offset_y=-offset_amount, offset_x=0)
+            self.tail_segments.append(
+                TailPiece(last_segment.pos.x, last_segment.pos.y - offset_amount)
             )
 
         elif move_direction == MoveDirection.left:
-            self.tail_pieces.append(
-                TailPiece(offset_y=0, offset_x=offset_amount)
+            self.tail_segments.append(
+                TailPiece(last_segment.pos.x + offset_amount, last_segment.pos.y)
             )
 
         elif move_direction == MoveDirection.right:
-            self.tail_pieces.append(
-                TailPiece(offset_y=0, offset_x=-offset_amount)
+            self.tail_segments.append(
+                TailPiece(last_segment.pos.x - offset_amount, last_segment.pos.y)
             )
 
-    def move_last_tail_to_front(self, move_direction, offset_amount=2):
-        if len(self.tail_pieces) == 0: return
-
+    def move_last_tail_to_front(self, move_direction, offset_amount=2, debug=False):
+        if len(self.tail_segments) == 0: return
+        t_piece = self.tail_segments[len(self.tail_segments) - 1]
         search_spot = self.hitbox_rect
+
         if move_direction == MoveDirection.up:
-            search_spot.y += 3
+            search_spot.y += offset_amount
+            self._draw_search_spot(search_spot, debug=debug)
+
             if not self.check_collision(search_spot):
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.x = search_spot.x
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.y = search_spot.y
-                # self.tail_pieces[len(self.tail_pieces) - 1].pos.x = search_spot.x
-                # self.tail_pieces[len(self.tail_pieces) - 1].pos.y = search_spot.y
+                print('working!')
+                self.tail_segments[len(self.tail_segments) - 1].pos.x = search_spot.x
+                self.tail_segments[len(self.tail_segments) - 1].pos.y = search_spot.y
 
         elif move_direction == MoveDirection.down:
-            search_spot.y -= 3
+            search_spot.y -= offset_amount
+            self._draw_search_spot(search_spot, debug=debug)
+
             if not self.check_collision(search_spot):
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.x = search_spot.x
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.y = search_spot.y
+                self.tail_segments[len(self.tail_segments) - 1].pos.x = search_spot.x
+                self.tail_segments[len(self.tail_segments) - 1].pos.y = search_spot.y
 
         elif move_direction == MoveDirection.left:
-            search_spot.x += 3
+            search_spot.x += offset_amount
+            self._draw_search_spot(search_spot, debug=debug)
+
             if not self.check_collision(search_spot):
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.x = search_spot.x
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.y = search_spot.y
+                self.tail_segments[len(self.tail_segments) - 1].pos.x = search_spot.x
+                self.tail_segments[len(self.tail_segments) - 1].pos.y = search_spot.y
 
         elif move_direction == MoveDirection.right:
-            search_spot.x -= 3
-            if not self.check_collision(search_spot):
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.x = search_spot.x
-                self.tail_pieces[len(self.tail_pieces) - 1].pos.y = search_spot.y
+            search_spot.x -= offset_amount
+            self._draw_search_spot(search_spot, debug=debug)
 
-    def check_collision(self, rect2):
-        if pygame.Rect.colliderect(self.hitbox_rect, rect2):
+            if not self.check_collision(search_spot):
+                self.tail_segments[len(self.tail_segments) - 1].pos.x = search_spot.x
+                self.tail_segments[len(self.tail_segments) - 1].pos.y = search_spot.y
+
+    def check_collision(self, rect2, rect1=None):
+        if rect1 == None: rect1 = self.hitbox_rect
+        if pygame.Rect.colliderect(rect1, rect2):
             return True
         return False
+
+    def _draw_search_spot(self, spot, debug=False):
+        if debug:
+            pygame.draw.rect(self.screen, color.blue, [spot.x, spot.y, 10, 10])
+            pygame.display.update()
+
+    def get_last_tail_segment(self):
+        if len(self.tail_segments) == 0: return
+        return self.tail_segments[len(self.tail_segments) - 1]
+
+    def get_tail_length(self):
+        return len(self.tail_segments)

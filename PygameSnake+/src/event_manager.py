@@ -24,7 +24,6 @@ class EventParser:
                 pygame.quit()
                 sys.exit()
 
-
     def parse_movement(self, last_dir, event):
         if event.type != pygame.KEYDOWN:
             return last_dir

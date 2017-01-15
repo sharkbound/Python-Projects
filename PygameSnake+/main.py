@@ -10,8 +10,10 @@ from pygame.math import Vector2
 
 # region Variables
 screen_size = (400, 400)
+screen_middle = (screen_size[0] / 2, screen_size[1] / 2)
 movement_distance = 0.8
 in_game = False
+debug_mode = False
 last_dir = MoveDir.down
 limit_x = screen_size[0]
 limit_y = screen_size[1]
@@ -19,12 +21,13 @@ movement_lerp_time = 0.9
 player_size = (10, 10)
 player_hitbox_size = (10, 10)
 apple_size = (20, 20)
-last_appended_tailpiece = TailPiece(0, 0)
+last_appended_tailpiece = None
 
 gui = Gui(pygame.display.set_mode(screen_size))
 parser = EventParser()
-player = Player(screen_size[0] / 2, screen_size[1] / 2, screen_size[0], screen_size[1], player_hitbox_size)
-apples = Apple.create_rand_apple_list(30, color.blue, (limit_x, limit_y), apple_size)
+player = Player(screen_middle[0], screen_middle[1], screen_size[0], screen_size[1], player_hitbox_size,
+                screen=gui.screen)
+apples = Apple.create_rand_apple_list(1, color.blue, (limit_x, limit_y), apple_size)
 clock = pygame.time.Clock()
 # endregion
 
@@ -39,9 +42,14 @@ while not in_game:
             in_game = True
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                for a in apples:
-                    a.reset()
+
+            if debug_mode:
+                if event.key == pygame.K_k:
+                    player.add_to_tail(last_dir, offset_amount=10)
+
+                if event.key == pygame.K_SPACE:
+                    for a in apples:
+                        a.reset()
 
         last_dir = parser.parse_movement(last_dir, event)
         parser.parse(event, player=player)
@@ -51,11 +59,12 @@ while not in_game:
     player.next_position = Player.return_moved_player(player.position, last_dir, change=movement_distance)
     player.position = Vector2.lerp(player.position, player.next_position, movement_lerp_time)
     player.check_if_in_bounds()
+    player.move_last_tail_to_front(last_dir, offset_amount=12, debug=debug_mode)
 
     # checking for collisions...
     for a in apples:
         if player.check_collision(a.hitbox_rect):
-            player.add_to_tail(last_dir)
+            player.add_to_tail(last_dir, offset_amount=10)
             a.reset()
     # endregion
 
@@ -64,17 +73,18 @@ while not in_game:
 
     for a in apples:
         pygame.draw.rect(gui.screen, color.red, [a.position.x, a.position.y, apple_size[0], apple_size[1]])
-        # pygame.draw.rect(gui.screen, color.green, a.hitbox_rect) #renders apples hitbox
+        if debug_mode:
+            pygame.draw.rect(gui.screen, color.green, a.hitbox_rect)  # renders apples hitbox
 
-    for piece in player.tail_pieces:
+    for piece in player.tail_segments:
         pygame.draw.rect(gui.screen, color.tan, [piece.pos.x, piece.pos.y, 10, 10])
 
     pygame.draw.rect(gui.screen, color.dark_tan, [player.position.x, player.position.y, player_size[0], player_size[1]])
-    # pygame.draw.rect(gui.screen, color.green, player.hitbox_rect) #renders the players snake head hitbox as a green square
+    if debug_mode:
+        pygame.draw.rect(gui.screen, color.green,
+                         player.hitbox_rect)  # renders the players snake head hitbox as a green square
 
     gui.update()
     clock.tick(120)  # fps limit
     # print('fps:', clock.get_fps())
     # endregion
-
-    player.move_last_tail_to_front(last_dir)
