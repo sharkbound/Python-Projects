@@ -53,8 +53,25 @@ class Player:
         elif self.position.y > self.y_limit:
             self.position.y = 0
 
-        self.hitbox_rect.x = self.position.x
-        self.hitbox_rect.y = self.position.y
+        # self.hitbox_rect.x = self.next_position[0]
+        # self.hitbox_rect.y = self.next_position[1]
+
+    def update_hitbox(self, new_x=0, new_y=0, new_x_offset=0, new_y_offset=0, mode=''):
+        if mode == 'offset':
+            self.hitbox_rect.x = self.hitbox_rect.x + new_x_offset
+            self.hitbox_rect.y = self.hitbox_rect.y + new_y_offset
+        elif mode == 'set':
+            self.hitbox_rect.x = new_x
+            self.hitbox_rect.y = new_y
+        elif mode == 'next_pos':
+            self.hitbox_rect.x = self.next_position[0]
+            self.hitbox_rect.y = self.next_position[1]
+        else:
+            self.hitbox_rect.x = self.position.x
+            self.hitbox_rect.y = self.position.y
+            print(f'x: {self.position.x}, y: {self.position.y}')
+
+
 
     def move(self, direction, change=5):
         if direction == MoveDirection.up:
@@ -106,7 +123,7 @@ class Player:
         if len(self.tail_segments) == 0: return
         t_piece = self.get_last_tail_segment()
         search_spot = self.hitbox_rect
-        debug=False
+        debug=debug
         if move_direction == MoveDirection.up:
             search_spot.y += offset_amount
             self._draw_search_spot(search_spot, debug=debug)

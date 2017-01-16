@@ -7,6 +7,7 @@ from snake_player import Player, MoveDirection as MoveDir, TailPiece, Position
 from apple import Apple
 from pygame.math import Vector2
 
+
 # region Variables
 def game_loop():
     screen_size = (400, 400)
@@ -21,16 +22,21 @@ def game_loop():
     player_hitbox_size = (10, 10)
     apple_size = (20, 20)
     last_appended_tailpiece = None
+    movement_distance = 0.8
     tail_placement_offset = 12
     tail_placement_offset_dict = {MoveDir.up: tail_placement_offset, MoveDir.down: -tail_placement_offset,
                                   MoveDir.left: tail_placement_offset, MoveDir.right: -tail_placement_offset}
-    movement_distance = 0.8
     player_movement_vect2_dict = {MoveDir.up: Vector2(0, -movement_distance),
                                   MoveDir.down: Vector2(0, movement_distance),
                                   MoveDir.left: Vector2(-movement_distance, 0),
                                   MoveDir.right: Vector2(movement_distance, 0)}
-    player_movement_raw_dict = {MoveDir.up: -movement_distance, MoveDir.down: movement_distance,
-                                MoveDir.left: -movement_distance, MoveDir.right: movement_distance}
+    # hitbox_offset = player_size[0] + 1.2
+    # player_hitbox_movement_raw_dict = {MoveDir.up: -hitbox_offset, MoveDir.down: hitbox_offset,
+    #                                    MoveDir.left: -hitbox_offset, MoveDir.right: hitbox_offset}
+
+    # player_movement_raw_dict = {MoveDir.up: -movement_distance, MoveDir.down: movement_distance,
+    #                             MoveDir.left: -movement_distance, MoveDir.right: movement_distance}
+
 
     gui = Gui(pygame.display.set_mode(screen_size))
     parser = EventParser()
@@ -70,6 +76,7 @@ def game_loop():
         player.position = Vector2.lerp(player.position, player.next_position, movement_lerp_time)
         player.check_if_in_bounds()
         player.move_last_tail_to_front(last_dir, offset_amount=tail_placement_offset, debug=debug_mode)
+        player.update_hitbox()
 
         # checking for collisions...
         for a in apples:
@@ -91,6 +98,7 @@ def game_loop():
 
         pygame.draw.rect(gui.screen, color.dark_tan,
                          [player.position.x, player.position.y, player_size[0], player_size[1]])
+
         if debug_mode:
             pygame.draw.rect(gui.screen, color.green,
                              player.hitbox_rect)  # renders the players snake head hitbox as a green square
