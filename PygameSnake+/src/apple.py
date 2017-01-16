@@ -6,7 +6,7 @@ import colors
 
 class Apple:
     def __init__(self, limits, apple_size, color=colors.red):
-        self.color = colors.red
+        self.color = color
         self.x_max = limits[0]
         self.y_max = limits[1]
         self.hitbox_rect = pygame.Rect(0, 0, apple_size[0], apple_size[1])

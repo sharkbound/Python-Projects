@@ -106,7 +106,7 @@ class Player:
         if len(self.tail_segments) == 0: return
         t_piece = self.get_last_tail_segment()
         search_spot = self.hitbox_rect
-
+        debug=False
         if move_direction == MoveDirection.up:
             search_spot.y += offset_amount
             self._draw_search_spot(search_spot, debug=debug)
@@ -147,9 +147,10 @@ class Player:
         return False
 
     def _draw_search_spot(self, spot, debug=False):
-        if debug:
-            pygame.draw.rect(self.screen, color.blue, [spot.x, spot.y, 10, 10])
-            pygame.display.update()
+        pass
+        # if debug:
+        #     pygame.draw.rect(self.screen, color.blue, [spot.x, spot.y, 10, 10])
+        #     pygame.display.update()
 
     def get_last_tail_segment(self):
         if len(self.tail_segments) == 0: return
@@ -158,12 +159,12 @@ class Player:
     def get_tail_length(self):
         return len(self.tail_segments)
 
-    # @staticmethod
-    # def return_moved_player(pos, move_dir, move_dict, change=5):
-    #     if move_dir == MoveDirection.up or move_dir == MoveDirection.down:
-    #         pos.y += move_dict[move_dir]
-    #
-    #     elif move_dir == MoveDirection.left or move_dir == MoveDirection.right:
-    #         pos.x += move_dict[move_dir]
-    #
-    #     return pos
+        # @staticmethod
+        # def return_moved_player(pos, move_dir, move_dict, change=5):
+        #     if move_dir == MoveDirection.up or move_dir == MoveDirection.down:
+        #         pos.y += move_dict[move_dir]
+        #
+        #     elif move_dir == MoveDirection.left or move_dir == MoveDirection.right:
+        #         pos.x += move_dict[move_dir]
+        #
+        #     return pos
