@@ -24,8 +24,9 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
-# Compiled Python Files
+# Python Stuff
 *.pyc
+__pycache__
 
 .DS_Store
 .AppleDouble
