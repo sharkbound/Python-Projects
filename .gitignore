@@ -24,6 +24,9 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
+# Compiled Python Files
+*.pyc
+
 .DS_Store
 .AppleDouble
 .LSOverride

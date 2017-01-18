@@ -1,13 +1,13 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='PygameSnake+',
-    version='',
+    version='1',
     packages=[''],
     package_dir={'': 'src'},
     url='',
     license='',
-    author='owner',
+    author='sharkbound',
     author_email='',
-    description=''
+    description='a snake game made in python using pygame'
 )
