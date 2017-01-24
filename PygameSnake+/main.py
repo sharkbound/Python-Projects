@@ -13,7 +13,7 @@ def game_loop():
     screen_size = (400, 400)
     screen_middle = (screen_size[0] / 2, screen_size[1] / 2)
     in_game = True
-    debug_mode = True
+    debug_mode = False
     last_dir = MoveDir.down
     limit_x = screen_size[0]
     limit_y = screen_size[1]

@@ -69,7 +69,7 @@ class Player:
         else:
             self.hitbox_rect.x = self.position.x
             self.hitbox_rect.y = self.position.y
-            print(f'x: {self.position.x}, y: {self.position.y}')
+            # print(f'x: {self.position.x}, y: {self.position.y}')
 
 
 
