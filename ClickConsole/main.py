@@ -1,3 +1,5 @@
+import os
+
 import click, colorama
 
 from colorama import Fore, Back
@@ -14,7 +16,8 @@ def hello(name, count):
 
 
 if __name__ == '__main__':
-    hello()
+    print('hi')
+    # hello()
     # ddd = 'jksdfsdf'
     # logger.log("Testing log....")
     # logger.logtofile("Testing logtofile....", file="logs\\testlog.log")

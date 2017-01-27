@@ -15,6 +15,12 @@ class GUI(QWidget):
         super().__init__()
         self.window_size = (600, 500)
 
+    def test(**kwargs):
+        iii = 1
+        uuu = 5
+        sss = ""
+
+
     def initUI(self):
         self.resize(600, 500)
         self.setWindowTitle('PyQt5 App')
@@ -23,6 +29,7 @@ class GUI(QWidget):
         btn.setToolTip('This is a <b>QPushButton</b> widget')
         btn.resize(btn.sizeHint())
         btn.move(50, 50)
+        self.test(iii=1)
 
     def add_btn(self, title='button', tooltip='', action=None, autosize=True, pos=(), size=()):
         btn = QPushButton(self)
@@ -48,7 +55,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     gui = GUI()
     gui.add_btn(title='I... AM.... BUTTON!!!!', tooltip='Tooltip', pos=(gui.window_size[0] / 2 - 60, gui.window_size[1]-60), size=(), action=QCoreApplication.instance().quit)
-
 
 
     gui.set_font('Dina', 10)

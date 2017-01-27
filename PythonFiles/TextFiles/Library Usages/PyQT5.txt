@@ -1,0 +1,14 @@
+Base requirements:
+	app = QApplication(sys.argv) : This is setting up the base app that is required.
+	widg = QWidget() : Create a GUI window
+	widg.show() : Show the GUI window
+	app.exec() : The main loop for the app
+
+Resizing:
+	widg.resize(500, 500) : resize GUI window
+
+Button:
+	btn_1 = QPushButton("button label here", Qwidget parent instance here)
+    btn.move(0, 0) : Move the button to a location on the GUI screen(QWidget)
+	btn.clicked.connect(function) : Add a function to be called when the button is clicked
+	
