@@ -1,6 +1,7 @@
 import sys
 import os
-# import logger
+import logger
+
 
 class DirectoryCrawler(object):
     def __init__(self):
@@ -13,7 +14,7 @@ class DirectoryCrawler(object):
         for dir in next(os.walk(path))[1]:
             self.last_log = f'{"-"*arrowLength}> {dir} : {iteration}'
             print(self.last_log)
-            # logger.log(self.last_log)
+            logger.logtofile(self.last_log, file='directoryOutput.txt')
             self.printDir(f'{path}\\{dir}', iteration + 1, arrowLength + 1)
 
 
