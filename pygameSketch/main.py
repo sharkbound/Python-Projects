@@ -1,3 +1,5 @@
+import os
+
 import pygame
 import time
 import random as r
@@ -5,6 +7,7 @@ import random as r
 from random import randrange, randint, uniform
 from pygame import display, draw
 from datetime import datetime
+from patterns import patterns
 
 screen_size = (600, 600)
 game = pygame.init()
@@ -22,14 +25,18 @@ y_max_range = 15
 y_min_range = -y_max_range  # -y_max_range  - (y_max_range+4 // 2)
 last_y = mid_y
 draw_chance = 10
+current_draw_index = len(patterns) - 1
 
 in_game = True
 draw_delay = False
 randomize_color = False
 force_random_color = False
 clear_screen = False
+require_left_mouse_held = True
+left_mouse_held = False
 
 color = (255, 0, 0)
+mouse_pos = (0, 0)
 
 
 def draw_rect(x, y, width=1, height=1, color=(255, 0, 0)):
@@ -46,30 +53,27 @@ while in_game:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             in_game = False
-
         if e.type == pygame.KEYDOWN:
             if e.key == pygame.K_ESCAPE:
                 in_game = False
             elif e.key == pygame.K_r:
                 clear_screen = True
-
-    # Calculating / Setting values
-    current_x += change_x
-    last_y = last_y + randrange(int(y_min_range), int(y_max_range))
-
-    # boundary checks
-    if last_y >= screen_size[1] or last_y <= 0:
-        last_y = mid_y
-        randomize_color = True
-    if current_x >= screen_size[0] or current_x <= 0:
-        current_x = 0
-        randomize_color = True
+            elif e.key == pygame.K_n:
+                if current_draw_index == len(patterns) - 1:
+                    current_draw_index = 0
+                else:
+                    current_draw_index += 1
+            elif e.key == pygame.K_SPACE:
+                color = random_color()
+        if e.type == pygame.MOUSEMOTION:
+            mouse_pos = e.pos
+        if e.type == pygame.MOUSEBUTTONDOWN or e.type == pygame.MOUSEBUTTONUP and e.button == 1:
+            left_mouse_held = not left_mouse_held
 
     # Rendering
-    if randomize_color or force_random_color:
-        color = random_color()
-        randomize_color = False
-    draw_rect(current_x, last_y, int(width), int(height), color=color)
+    if require_left_mouse_held and left_mouse_held or not require_left_mouse_held:
+        for o in patterns[current_draw_index]:
+            draw_rect(mouse_pos[0] + o[0], mouse_pos[1] + o[1], 2, 2, color=color)
 
     # Updating display
     if clear_screen:
@@ -80,6 +84,5 @@ while in_game:
         pygame.display.update()
     else:
         display.update()
-    # display.update()
     display.set_caption(str(clock.get_fps()))
-    clock.tick(10000)
+    clock.tick(60_0000)
