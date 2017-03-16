@@ -1,8 +1,15 @@
 import pattern_creator as pc
 
 # (int, int) is the height and width
+
+# negative x = left of mouse
+# positive x = right of mouse
+
+# negative y = top of mouse
+# positive y = bottom of mouse
+
 pattern_list = [
-    pc.Pattern([(0,0)]),
+    pc.Pattern([(0, 0)]),
     pc.Pattern([
         (30, 0), (0, 30), (-30, 0), (0, -30)
     ]),
@@ -17,7 +24,7 @@ pattern_list = [
         (-50, 50), (-30, 50), (-10, 50), (10, 50), (30, 50), (50, 50),  # botton line
         (-50, 50), (-50, 30), (-50, 10), (-50, -10), (-50, -30),  # left line
         (50, 50), (50, 30), (50, 10), (50, -10), (50, -30),  # right line
-    ], (2, 2))
+    ], (2, 2)),
 ]
 
 
