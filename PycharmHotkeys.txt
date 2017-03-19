@@ -11,3 +11,4 @@ Open settings: alt + f7
 Extract Methods: ctrl + alt + m
 Extract Variable: ctrl + alt + v
 Alt + Insert : create empty file
+ctrl + f9 : run current file
