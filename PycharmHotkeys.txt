@@ -16,3 +16,5 @@ alt + shift + f9 : debug current file
 alt + f12 : switch between console and editor
 ctrl + shift + i : Quick definition
 ctrl + Q : Quick documentation
+ctrl + shift + a : action search
+ctrl + shift + alt + insert : create scratch file
