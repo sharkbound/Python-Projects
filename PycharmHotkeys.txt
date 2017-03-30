@@ -21,3 +21,4 @@ ctrl + shift + alt + insert : create scratch file
 alt + shift + e : run selected code in console
 shift + f1 : external documentation
 ctrl + alt + t : Surround selection with
+f4 : jump to source
