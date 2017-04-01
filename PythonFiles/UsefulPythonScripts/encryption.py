@@ -40,7 +40,7 @@ def decrypt(string, step=10):
 
 
 def encrypt_key(string, key, step=0):
-    key = key * (len(string) - 1)
+    key = key * len(string)
     enc_str = ''
     for i, c in enumerate(string):
         new_char = chr(ord(c) + ord(key[i]) + step)
@@ -49,7 +49,7 @@ def encrypt_key(string, key, step=0):
 
 
 def decrypt_key(string, key, step=0):
-    key = key * (len(string) - 1)
+    key = key * len(string)
     enc_str = ''
     for i, c in enumerate(string):
         new_char = chr(ord(c) - ord(key[i]) - step)
