@@ -22,3 +22,7 @@ alt + shift + e : run selected code in console
 shift + f1 : external documentation
 ctrl + alt + t : Surround selection with
 f4 : jump to source
+ctrl + ctrl + arrow key up or down : linear multi-cursor
+alt + click : multi-cursor where you click at
+shift + alt + left mouse click : delete a mutlicursor where u click
+shift + alt + arrow up or down : move current line contents up or down
