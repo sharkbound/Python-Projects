@@ -26,3 +26,8 @@ ctrl + ctrl + arrow key up or down : linear multi-cursor
 alt + click : multi-cursor where you click at
 shift + alt + left mouse click : delete a mutlicursor where u click
 shift + alt + arrow up or down : move current line contents up or down
+ctrl + f6 : refactor method
+ctrl + e : recent files
+ctrl + shift + n : go to file
+ctrl + shift + up or down : move region up or down
+alt + up or down : jump to functions
