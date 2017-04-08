@@ -22,8 +22,7 @@ def decode(key, string):
     encoded_string = "".join(encoded_chars)
     return encoded_string  # base64.urlsafe_b64encode(encoded_string)
 
-
-def encrypt(string, step=10):
+def encrypt_step(string, step=10):
     enc_str = ''
     for i, c in enumerate(string):
         new_char = chr(ord(c) + i + step)
@@ -31,7 +30,7 @@ def encrypt(string, step=10):
     return enc_str
 
 
-def decrypt(string, step=10):
+def decrypt_step(string, step=10):
     enc_str = ''
     for i, c in enumerate(string):
         new_char = chr(ord(c) - i - step)
@@ -39,19 +38,29 @@ def decrypt(string, step=10):
     return enc_str
 
 
+'''
+NOTES:
+    step 10,000+ start producing arrows question marks and strange charaters
+    step 100,000 blocks
+
+'''
 def encrypt_key(string, key, step=0):
-    key = key * len(string)
+    while len(key) < len(string):
+        key *= 2
+
     enc_str = ''
     for i, c in enumerate(string):
-        new_char = chr(ord(c) + ord(key[i]) + step)
+        new_char = chr(ord(c) + ord(key[i]) % 256 + step)
         enc_str += new_char
     return enc_str
 
 
 def decrypt_key(string, key, step=0):
-    key = key * len(string)
+    while len(key) < len(string):
+        key *= 2
+
     enc_str = ''
     for i, c in enumerate(string):
-        new_char = chr(ord(c) - ord(key[i]) - step)
+        new_char = chr(ord(c) - ord(key[i]) % 256 - step)
         enc_str += new_char
     return enc_str
