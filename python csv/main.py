@@ -2,7 +2,8 @@ import csv
 import os
 from msvcrt import getch
 
-csv_path = "paypal.CSV"
+import re
+
 output = "output.txt"
 
 
@@ -15,11 +16,22 @@ class Donation:
         return f'{self.sender_name} -> ${self.sender_donation}'
 
     def __str__(self):
-        return f'{self.sender_name} -> ${self.sender_donation}'
+        return f'{self.sender_name}: ${self.sender_donation}'
 
+def get_file_path():
+    found_files = list(next(os.walk('.'))[2])
+    for i, file in enumerate(found_files):
+        print(f'{i} : {file}')
+
+    return found_files[int(input('>>> '))]
 
 if __name__ == '__main__':
-    file = open(csv_path, 'r')
+    print('Which file do you want to open?')
+
+    # files = list(filter(lambda x: re.match(r'', x), next(os.walk('.'))[2]))
+
+
+    file = open(get_file_path(), 'r')
     reader = csv.reader(file)
     header = next(reader)
 
@@ -41,7 +53,7 @@ if __name__ == '__main__':
         output_file.write(f'\nTotal donation count: {len(donations)}\n')
         output_file.write(f'Total Donation Amount: ${total_donation_amount}\n')
         output_file.write(f'Average donation amount: ${(total_donation_amount / len(donations)):.3}')
-    # os.system(output)
+
     print('Do you want to open the output text file? [Y/N]')
     if (ord(getch()) == 121):
-        os.system(rf'{output}')
+        os.startfile(output)
