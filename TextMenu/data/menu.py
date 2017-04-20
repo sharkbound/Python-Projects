@@ -4,15 +4,18 @@ from msvcrt import getch
 k_arrow_down = 80
 k_arrow_up = 72
 k_enter = 13
+k_space = 32
 
+class MenuItem:
+    def __init__(self, text, onselect):
+        self.text = text
+        self.on_select = onselect
 
 class Menu:
-    def __init__(self, options, start_index, actions=None, selected_prefix='--> '):
-        self.start_index = start_index
-        self.current_index = start_index
+    def __init__(self, options, selected_prefix='--> '):
+        self.current_index = 0
         self.options = options
         self.options_count = len(options)
-        self.actions = actions
         self.selected_prefix = selected_prefix
 
     @staticmethod
@@ -28,8 +31,11 @@ class Menu:
                 self.next_option('up')
             elif key == k_arrow_down:
                 self.next_option('down')
-            elif key == k_enter:
-                self.actions[self.current_index]()
+            elif key == k_enter or key == k_space:
+                self.clear_screen()
+                self.options[self.current_index].on_select()
+                print('Press any key to return to the menu...')
+                getch()
 
             # self.render()
 
@@ -37,9 +43,9 @@ class Menu:
         output = ''
         for i, option in enumerate(self.options):
             if i == self.current_index:
-                output += self.selected_prefix + str(option)
+                output += self.selected_prefix + option.text
             else:
-                output += str(option)
+                output += option.text
             output += '\n'
 
         # print('\n'*5)
