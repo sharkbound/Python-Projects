@@ -33,6 +33,7 @@ require_left_mouse_held = True
 left_mouse_held = False
 update_bg_color = False
 reset_bg_color = False
+mouse_visible = True
 
 color = (255, 0, 0)
 bg_color = (0, 0, 0)
@@ -59,8 +60,9 @@ def draw_rect(x, y, width=1, height=1, color=(255, 0, 0)):
 def random_color():
     return (randint(0, 255), randint(0, 255), randint(0, 255))
 
+
 def apply_draw_mod():
-    if draw_modifier == 0:
+    if draw_modifier <= 0:
         return 1
     return draw_modifier
 
@@ -77,6 +79,10 @@ if __name__ == '__main__':
 
     # game loop
     while in_game:
+        if left_mouse_held and mouse_visible or not left_mouse_held and not mouse_visible:
+            pygame.mouse.set_visible(False if mouse_visible else True)
+            mouse_visible = not mouse_visible
+
         # Event handling
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
@@ -94,6 +100,8 @@ if __name__ == '__main__':
                     color = random_color()
                 elif e.key == pygame.K_c:
                     force_random_color = not force_random_color
+                elif e.key == pygame.K_x:
+                    color = random_color()
                 elif e.key == pygame.K_f:
                     update_bg_color = True
                 elif e.key == pygame.K_MINUS and draw_modifier != 0:
