@@ -4,7 +4,7 @@ Rename Variable: shift+f6
 Run: control+f5
 Surround with: ctrl+alt+t
 Comment / uncomment selected lines: ctrl+/
-Open a file in explorer: ctrl+alt+f12
+Open a file in explorer: ctrl + alt+ f12
 Search everything: press shift twice
 Symbol search: ctrl+alt+shift+n
 Open settings: alt + f7
@@ -33,3 +33,4 @@ ctrl + shift + up or down : move region up or down
 alt + up or down : jump to functions
 ctrl + j : view templates for current context
 alt + f5 : debug current
+ctrl + alt + insert : create new file in current open files directory
