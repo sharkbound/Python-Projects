@@ -11,6 +11,7 @@ class Direction(Enum):
 
 SCREEN_SIZE = (600, 600)
 BLOCK_SIZE = 10
+SPEED_INCREMENT = 0.01
 
 BLACK = Color('black')
 WHITE = Color('white')
@@ -63,6 +64,8 @@ while True:
     tail_length = 0
     apple = get_random_apple()
     gameover = False
+    frames = 0
+    speed = 10
 
     while not gameover:
         SRC.fill(BLACK)
@@ -90,12 +93,13 @@ while True:
         draw.rect(SRC, RED, [apple.x, apple.y, BLOCK_SIZE, BLOCK_SIZE])
         draw.rect(SRC, [0, 0, 150], [*last, BLOCK_SIZE, BLOCK_SIZE])
 
-        if cur_dir == Direction.STILL and len(points) > 1: continue
+        if cur_dir == Direction.STILL: continue
         for p in points[:-1]:
             draw.rect(SRC, [0, 100, 0], [p.x, p.y, BLOCK_SIZE, BLOCK_SIZE])
             if p == last:
                 gameover = True # player hit his tail
 
-
+        speed += SPEED_INCREMENT
+        print(speed)
         display.update()
-        CLOCK.tick(10)
+        CLOCK.tick(speed)
