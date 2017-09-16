@@ -18,7 +18,7 @@ def encrypt(*chars):
         found = False
         for i, r in enumerate(CYPHER):
             for j, v in enumerate(r):
-                if v == c:
+                if c in v:
                     res += f'{i}{j}'
                     found = True
         if not found:
