@@ -38,16 +38,21 @@ def crypto_menu(mode):
         except FileNotFoundError as e:
             print(e)
     elif r == '2':
-        if mode == Mode.ENCRYPT:
-            text = data.encrypt(*input('Enter text to encrypt:\n').replace(r'\n', '\n'))
-        else:
-            text = data.decrypt(input('Enter text to decrypt:\n'))
+        text = get_encrypted_text_from_console(mode)
 
     fname = input('Enter output file name: ')
     with open(fname, 'w') as f:
         f.write(text)
         msg = f'Saved to {fname}'
         print(f'\n{"="*len(msg)}\n{msg}\n{"="*len(msg)}')
+
+
+def get_encrypted_text_from_console(mode):
+    if mode == Mode.ENCRYPT:
+        text = data.encrypt(*input('Enter text to encrypt:\n').replace(r'\n', '\n'))
+    else:
+        text = data.decrypt(input('Enter text to decrypt:\n'))
+    return text
 
 
 def get_input(prompt, *valid_responses):
