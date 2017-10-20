@@ -1,5 +1,5 @@
 from Linq import Query
 
-data = [6, 1, -1, 10, 700, 48, 1]
-q = Query(data).shuffle()
+data = [1, None, 2, None, 3, 4, 5, 6, 7, None, None, 0]
+q = Query(data).filter_nones()
 print(q)

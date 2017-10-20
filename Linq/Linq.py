@@ -1,3 +1,4 @@
+from functools import reduce
 from random import randrange, randint
 from statistics import mean
 from typing import Iterable
@@ -7,7 +8,6 @@ from itertools import chain, tee
 class Query:
     def __init__(self, items):
         self.items = iter(items)
-        self.count = sum(1 for _ in self)
 
     @property
     def as_list(self):
@@ -23,6 +23,11 @@ class Query:
     def as_set(self):
         """get all the current values as a set"""
         return set(self)
+
+    def count(self, predicate=None):
+        if predicate:
+            return sum(1 for x in self if predicate(x))
+        return sum(1 for _ in self)
 
     def iteritems(self):
         self.items, ret = tee(self.items)
@@ -44,29 +49,23 @@ class Query:
         """orders values according to a func, or by raw values if func is None"""
         return Query(sorted(self, key=func, reverse=reverse))
 
-    def average(self):
+    def average(self, func=None):
         """returns a the average of all values"""
-        return mean(self.as_tuple)
+        return self.sum(func) / self.count()
 
-    def mean(self):
-        """returns a mean of all values (same as average)"""
-        return self.average()
-
-    def first(self, func=None, default=None):
+    def first(self, predicate=None, default=None):
         """returns first item that ether meets the condition or first item in value if func in None"""
         for x in self:
-            if func and func(x):
-                return x
-            elif not func:
+            if predicate and predicate(x) or not predicate:
                 return x
         return default
 
-    def last(self, func=None, default=None):
+    def last(self, predicate=None, default=None):
         """returns last item that ether meets the condition or last item in value if func in None"""
-        return self.reverse().first(func, default)
+        return self.reverse().first(predicate, default)
 
     def at(self, index, default=None):
-        """gets a value at specified index, returns default value of not found"""
+        """gets a value at specified index, returns default value if not found"""
         for i, v in enumerate(self):
             if i == index:
                 return v
@@ -104,7 +103,7 @@ class Query:
         return Query(self.as_set)
 
     def types(self):
-        """returns a query with all the type of the current items"""
+        """returns a query with all the types of the current items"""
         return self.map(lambda x: type(x))
 
     def max(self, func=None):
@@ -114,16 +113,37 @@ class Query:
         return max(self)
 
     def min(self, func=None):
-        """get the min value from all current items, filters by function if func is not None"""
+        """get the min value from all current items, filters byf unction if func is not None"""
         if func:
             return min(map(func, self))
         return min(self)
 
     def add(self, *values):
+        """adds other iterables to the current items"""
         return Query(chain(self, *values))
 
-    def shuffle(self):
-        return Query(self.orderby(lambda x: randrange(self.count+1)))
+    def shuffle(self, func=None):
+        """randomly orders items, using func if provided"""
+        count = self.count()+1
+        if not func:
+            func = lambda x: randrange(count)
+        return Query(self.orderby(func))
+
+    def sum(self, func=None):
+        if func:
+            return sum(map(func, self))
+        return sum(self)
+
+    def aggregate(self, func, start_value=None):
+        if start_value is not None:
+            return reduce(func, self, start_value)
+        return reduce(func, self, self.at(0))
+
+    def filter_nones(self):
+        return Query(self.where(lambda x: x is not None))
+
+    def __len__(self):
+        return self.count()
 
     def __contains__(self, item):
         item_type = type(item)
@@ -139,6 +159,6 @@ class Query:
         return self.iteritems()
 
     def __str__(self):
-        return ', '.join(map(str, self))
+        return ', '.join(self.map(str))
 
 
