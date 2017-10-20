@@ -1,6 +1,6 @@
 from functools import reduce
-from random import randrange, randint
-from statistics import mean
+from random import randrange
+from statistics import variance
 from typing import Iterable
 from itertools import chain, tee
 
@@ -124,23 +124,44 @@ class Query:
 
     def shuffle(self, func=None):
         """randomly orders items, using func if provided"""
-        count = self.count()+1
+        count = self.count() + 1
         if not func:
             func = lambda x: randrange(count)
         return Query(self.orderby(func))
 
     def sum(self, func=None):
+        """returns the sum of all values"""
         if func:
             return sum(map(func, self))
         return sum(self)
 
-    def aggregate(self, func, start_value=None):
-        if start_value is not None:
-            return reduce(func, self, start_value)
-        return reduce(func, self, self.at(0))
+    # def aggregate(self, func, start_value=None):
+    #     """returns the result of the function with the result of the last call as the first parameter, and the next item the second"""
+    #     if start_value is not None:
+    #         return reduce(func, self, start_value)
+    #     return reduce(func, self, self.at(0))
 
     def filter_nones(self):
         return Query(self.where(lambda x: x is not None))
+
+    def variance(self, xbar=None):
+        return variance(self, xbar)
+
+    def similar(self, items):
+        """returns a Query with all items that are the same with the same index between the 2 iterables"""
+        def _similar():
+            for v1, v2 in zip(self, items):
+                if v1 == v2:
+                    yield v1
+        return Query(_similar())
+
+    def different(self, items):
+        """returns a query with all items that are different with the same index between the 2 iterables"""
+        def _diff():
+            for v1, v2 in zip(self, items):
+                if v1 != v2:
+                    yield (v1, v2)
+        return Query(_diff())
 
     def __len__(self):
         return self.count()
@@ -160,5 +181,3 @@ class Query:
 
     def __str__(self):
         return ', '.join(self.map(str))
-
-
