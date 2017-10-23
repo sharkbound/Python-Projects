@@ -1,3 +1,4 @@
+from collections import defaultdict
 from functools import reduce
 from random import randrange
 from statistics import variance
@@ -148,20 +149,28 @@ class Query:
         return variance(self, xbar)
 
     def similar(self, items):
-        """returns a Query with all items that are the same with the same index between the 2 iterables"""
-        def _similar():
-            for v1, v2 in zip(self, items):
-                if v1 == v2:
-                    yield v1
-        return Query(_similar())
+        """returns a Query with all items that are the same between the 2 iterables"""
+        def _sim():
+            for v in self:
+                if v in items:
+                    yield v
+
+        return Query(_sim())
 
     def different(self, items):
-        """returns a query with all items that are different with the same index between the 2 iterables"""
+        """returns a query with all items that are different between the 2 iterables"""
         def _diff():
-            for v1, v2 in zip(self, items):
-                if v1 != v2:
-                    yield (v1, v2)
+            for v in self:
+                if v not in items:
+                    yield v
+
         return Query(_diff())
+
+    def groupby(self, func):
+        groups = defaultdict(list)
+        for v in self:
+            groups[func(v)].append(v)
+        return Query(groups.items())
 
     def __len__(self):
         return self.count()
