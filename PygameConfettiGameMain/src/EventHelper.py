@@ -1,5 +1,5 @@
 import pygame
-from gameHelper import CorePygameFuncs as Core
+from src.gameHelper import CorePygameFuncs as Core
 
 
 class EventParser:

@@ -1,11 +1,11 @@
-from gameHelper import Setup
-from gameHelper import Renderer
-from gameHelper import CorePygameFuncs as Core
-from gameHelper import ColorFuncs
-from MiscFuncs import Misc
-from MiscFuncs import changeSetMode
+from src.gameHelper import Setup
+from src.gameHelper import Renderer
+from src.gameHelper import CorePygameFuncs as Core
+from src.gameHelper import ColorFuncs
+from src.MiscFuncs import Misc
+from src.MiscFuncs import changeSetMode
 
-from EventHelper import EventParser
+from src.EventHelper import EventParser
 
 from datetime import datetime
 

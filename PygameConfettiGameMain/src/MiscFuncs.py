@@ -1,6 +1,6 @@
 import random
-from gameHelper import Renderer
-import gameHelper as game
+from .gameHelper import Renderer
+import src.gameHelper as game
 import math
 from enum import Enum
 from datetime import datetime
