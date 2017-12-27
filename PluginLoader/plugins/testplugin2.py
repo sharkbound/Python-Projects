@@ -11,7 +11,6 @@ class TestPlugin2(Plugin):
         print(self.name, 'has unloaded')
 
 
-class Test2(TestPlugin2, Plugin):
+class TestSubclassesTestPlugin2(TestPlugin2):
     def __init__(self):
-        super().__init__()
-        print(super())
+        Plugin.__init__(self, 'bob', [])
