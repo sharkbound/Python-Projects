@@ -1,5 +1,14 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class CommandType(Enum):
-    INVALID, NOTHING, INSPECT, INTERACT, HELP, LEFT, RIGHT, FORWARD, BACK = range(9)
+    INVALID = auto()
+    NOTHING = auto()
+    LOOK = auto()
+    INTERACT = auto()
+    HELP = auto()
+    LEFT = auto()
+    RIGHT = auto()
+    FORWARD = auto()
+    BACK = auto()
+    LIST_INTERACTABLES = auto()

@@ -1,4 +1,4 @@
-from src.interactable import Interactable
+from models.interactable import Interactable
 
 
 class Lamp(Interactable):

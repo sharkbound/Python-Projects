@@ -1,5 +1,7 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class GameAction(Enum):
-    NOTHING, GO_TO_PREVIOUS_ROOM, GAME_OVER = range(2)
+    NOTHING = auto()
+    GO_TO_PREVIOUS_ROOM = auto()
+    GAME_OVER = auto()
