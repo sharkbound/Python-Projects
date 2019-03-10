@@ -2,7 +2,6 @@ from sqlalchemy import orm, create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from contextlib import contextmanager
 
-
 Base = declarative_base()
 engine = create_engine('sqlite:///database.db', echo=False)
 Base.metadata.bind = engine
@@ -25,7 +24,7 @@ def new_user(name):
     return User(name=name)
 
 
-Base.metadata.create_all()  
+Base.metadata.create_all()
 
 
 @contextmanager
@@ -41,5 +40,5 @@ def get_user(name) -> User:
 if not get_user('timmy'):
     with transaction():
         db.add(new_user('timmy'))
-        
+
 print(get_user('timmy'))
