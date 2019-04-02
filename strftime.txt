@@ -1,0 +1,33 @@
+========================================================================
+Code 	 Meaning 												Example
+========================================================================
+
+MONTH:
+%b 		 Month as locale’s abbreviated name. 					Sep
+%B 	     Month as locale’s full name. 							September
+%m 		 Month as a zero-padded decimal number. 				09
+
+
+DAY:
+%d 		 Day of the month as a zero-padded decimal number. 		30
+
+
+YEAR:
+%y 		 Year without century as a zero-padded decimal number. 	13
+%Y 	     Year with century as a decimal number. 	            2013
+
+
+HOUR:
+%I 		 Hour (12-hour clock) as a zero-padded decimal number. 	07
+%H 	     Hour (24-hour clock) as a zero-padded decimal number. 	07
+
+
+MINUTE:
+%M 	     Minute as a zero-padded decimal number. 				06
+
+
+SECOND:
+%S 		 Second as a zero-padded decimal number. 		        05
+
+AM / PM:
+%p 	     Locale’s equivalent of either AM or PM. 				AM
