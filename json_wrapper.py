@@ -106,6 +106,16 @@ class JsonWrapper:
 
         return pprint.pformat(self._data)
 
+
+def has_value(value):
+    """
+    verifies that a value is not MISSING_VALUE
+    True return means it is not MISSING_VALUE
+    False return means that the value was MISSING_VALUE
+    :param value: the value to check if it is not MISSING_VALUE
+    """
+    return value is not MISSING_VALUE
+
 # def test():
 #     data = JsonWrapper({
 #         'bio': r'¯\_(ツ)_/¯',
