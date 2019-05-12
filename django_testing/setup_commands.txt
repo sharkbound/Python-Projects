@@ -1,0 +1,2 @@
+# create the project:
+django-admin startproject django_testing
