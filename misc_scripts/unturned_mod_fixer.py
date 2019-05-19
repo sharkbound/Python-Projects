@@ -14,4 +14,4 @@ for root, folders, files in os.walk(os.getcwd()):
                 f.write('\n\nBypass_Hash_Verification')
                 print(f'Fixing #{count} {file}')
 print('Done!')
-input('Press any key to exit...')
+input('Press any name to exit...')

@@ -1,4 +1,3 @@
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QPushButton, QGridLayout
 
 from pyside2_qt_app.util import app_modal, add_grid_widget, column_stretch, row_stretch
@@ -23,9 +22,9 @@ class MainWidget(QWidget):
         add_grid_widget(self, QPushButton('4'), 0, 2)
         add_grid_widget(self, QPushButton('5'), 1, 2)
 
-        column_stretch(self.grid, 1, 2)
+        column_stretch(self.grid, 0, 2)
 
-        row_stretch(self.grid, 1, 2)
+        row_stretch(self.grid, 0, 1)
 
         app_modal(self)
 

@@ -88,7 +88,7 @@ if __name__ == '__main__':
             if e.type == pygame.QUIT:
                 in_game = False
 
-            # key press event handling
+            # name press event handling
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_ESCAPE:
                     in_game = False

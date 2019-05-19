@@ -75,7 +75,7 @@ while True:
                 exit()
             elif e.type == KEYDOWN:
                 cur_dir = KEY_TO_MOVE.get(e.key, cur_dir)
-                # cheat key
+                # cheat name
                 if e.key == K_n:
                     tail_length += 10
 

@@ -34,7 +34,7 @@ class Menu:
             elif key == k_enter or key == k_space:
                 self.clear_screen()
                 self.options[self.current_index].on_select()
-                print('Press any key to return to the menu...')
+                print('Press any name to return to the menu...')
                 getch()
 
             # self.render()

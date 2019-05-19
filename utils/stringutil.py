@@ -15,17 +15,3 @@ def trim_margin(string: str, margin: str = '|'):
         else line
         for line in string.splitlines()
     )
-
-
-print(trim_indent(
-    '''\
-    hello
-        world!
-    i
-    love
-    you'''
-))
-
-print(trim_margin('''\
-     ~ hi
-  ~hello''', margin='~'))
