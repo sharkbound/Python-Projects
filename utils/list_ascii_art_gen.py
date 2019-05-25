@@ -4,7 +4,7 @@ from functools import partial
 from utils.stringutil import trim_indent
 
 
-def generate_lisp_ascii_art(*lines, filler='.'):
+def generate_scheme_ascii_art(*lines, filler='.'):
     """
     example output:
     (list (display (quote _o_)) (display (quote __o)) (display (quote ooo)) (display (quote glider)) (display (quote btw)))
@@ -21,17 +21,8 @@ def generate_lisp_ascii_art(*lines, filler='.'):
     return f'(list {mid})'
 
 
-print(generate_lisp_ascii_art(trim_indent(
+print(generate_scheme_ascii_art(trim_indent(
     r'''\
-
-███╗   ██╗ ██████╗ 
-████╗  ██║██╔═══██╗
-██╔██╗ ██║██║   ██║
-██║╚██╗██║██║   ██║
-██║ ╚████║╚██████╔╝
-╚═╝  ╚═══╝ ╚═════╝ 
-                   
-
-
-'''
+    
+    '''
 )))
