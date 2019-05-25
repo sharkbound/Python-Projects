@@ -21,16 +21,3 @@ def auto_repr(cls=None, include_private=True):
         return cls
 
     return wrapper
-
-
-@auto_repr(include_private=False)
-class Test:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self._x = x
-        self._y = y
-        self.__secret = 'SHHH, dont tell anyone i am here!'
-
-
-print(Test(1, -1))
