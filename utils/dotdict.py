@@ -3,6 +3,8 @@ from collections import OrderedDict
 
 
 class DotDict(OrderedDict):
+    _missing: 'DotDict' = None
+
     def __getattr__(self, item):
         if item in self.__dict__:
             return self.__dict__[item]
@@ -17,12 +19,14 @@ class DotDict(OrderedDict):
         self[key] = value
 
     def __missing__(self, key):
-        self[key] = DotDict()
-        return self[key]
+        if self.__class__._missing is None:
+            self.__class__._missing = DotDict()
+        return self.__class__._missing
 
     @property
     def json(self):
         return json.dumps(self)
+
 
 # testing code
 if __name__ == '__main__':
