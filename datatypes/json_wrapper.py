@@ -44,6 +44,7 @@ class JsonWrapper:
         self.iter_keys_only = iter_keys_only
         self._data = data
 
+    @property
     def pretty(self):
         """
         returns a pretty printed version of the data this wrapper holds
