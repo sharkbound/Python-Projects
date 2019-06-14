@@ -1,5 +1,6 @@
 from random import choice
 
+
 # for eso challenge : https://github.com/python-discord/esoteric-python-challenges/tree/master/challenges/06-maybe-keyword
 
 class MaybeMeta(type):

@@ -3,7 +3,7 @@ def _get_indent(s: str):
 
 
 def trim_indent(string: str):
-    lines = string.splitlines(keepends=False)
+    lines = [l for l in string.splitlines(keepends=False) if l.strip()]
     min_indent = min(map(_get_indent, lines))
     return '\n'.join(line[min_indent:] for line in lines)
 
@@ -15,3 +15,13 @@ def trim_margin(string: str, margin: str = '|'):
         else line
         for line in string.splitlines()
     )
+
+
+print(
+    trim_indent(
+        '''
+            HI
+        hello!
+        '''
+    )
+)
