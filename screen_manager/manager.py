@@ -25,13 +25,6 @@ class command:
         return self
 
 
-screens: Dict[str, 'Screen'] = {}
-
-
-def get_screen(id: str, default=None) -> 'Screen':
-    return screens.get(id, default)
-
-
 class Screen:
     id: str
     name: str = 'MISSING NAME'
@@ -50,9 +43,12 @@ class Screen:
         for k, v in tuple(self.__class__.__dict__.items()):
             if isinstance(v, command):
                 # we need to bind the function to the instance,
-                # so we manually call __get__ on the function
+                # manually calling __get__ on the function does this
                 v.func = v.func.__get__(self)
                 self.cmds[v.name.lower()] = v
+
+    def pause(self):
+        input('\npress enter to continue...')
 
     def can_enter(self, prev: 'Screen'):
         return True
@@ -101,12 +97,24 @@ class ScreenManager:
     def current(self) -> Screen:
         return self.history[-1]
 
-    @current.setter
-    def current(self, screen: List[Screen]):
+    def goto(self, screen: Union[str, Screen]):
+        id = screen
+        if isinstance(screen, str):
+            screen = get_screen(screen)
+
+        if screen is None:
+            raise ValueError(f'cannot find screen with id: {screen}')
+
+        if self.history and not screen.can_enter(self.current) or self.history and not self.current.can_leave(screen):
+            return
+
         self.history.append(screen)
+        self.current.on_leave()
+        screen.on_enter()
 
     def back(self):
-        self.history.pop()
+        if self.history[-2].can_enter(self.current):
+            self.history.pop()
 
     def shutdown(self):
         self.running = False
@@ -115,8 +123,8 @@ class ScreenManager:
     def can_go_back(self) -> bool:
         return len(self.history) > 1
 
-    def run(self, initial: Screen):
-        self.current = initial
+    def run(self, initial: Union[str, Screen]):
+        self.goto(initial)
         self.running = True
 
         while self.running:
@@ -138,6 +146,11 @@ class ScreenManager:
                     traceback.print_exc()
 
 
+def get_screen(id: str, default=None) -> 'Screen':
+    return screens.get(id, default)
+
+
+screens: Dict[str, Screen] = {}
 mgr = ScreenManager()
 
 
@@ -145,9 +158,23 @@ class MainMenu(Screen):
     name = 'Billy'
     id = '1'
 
+    def can_leave(self, dest: 'Screen'):
+        print('nope')
+        self.pause()
+        return False
+
     @command('test')
     def cmd_test(self, *args):
-        raise ValueError()
+        mgr.goto('2')
+
+
+class Other(Screen):
+    name = 'Other'
+    id = '2'
+
+    @command('test2')
+    def cmd_test(self, *args):
+        mgr.goto('1')
 
 
 mgr.run(MainMenu())
