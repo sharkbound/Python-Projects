@@ -159,8 +159,6 @@ class MainMenu(Screen):
     id = '1'
 
     def can_leave(self, dest: 'Screen'):
-        print('nope')
-        self.pause()
         return False
 
     @command('test')
