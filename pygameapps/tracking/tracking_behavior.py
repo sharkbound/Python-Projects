@@ -2,7 +2,7 @@ from pygame_util import *
 
 setup((600, 600))
 
-t = Text(font_name='source code pro', size=100, text='hello!')
+t = Text(font_name='impact', size=100, text='hello!')
 b = Button((200, 200), 100, 100, gray)
 
 while running():
