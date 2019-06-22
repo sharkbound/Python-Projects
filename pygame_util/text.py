@@ -3,18 +3,26 @@ from pygame.font import SysFont, Font as PygameFont
 from pygame import Surface, Color
 
 
-
 class Text:
     def __init__(self, **kw):
         """
-        :font_name: name of the font
-        :text: the text value
-        :size: font size
-        :bold: specifies if the font is bold
-        :italic:  specifies if the font is italic
-        :antialias: specifies if the font has antialiasing
-        :color: the font color
-        :background: the font background (color?)
+        wrapper for pygame's font class
+
+        font_name -> name of the font
+
+        text -> the text value
+
+        size -> font size
+
+        bold -> specifies if the font is bold
+
+        italic -> specifies if the font is italic
+
+        antialias -> specifies if the font has antialiasing
+
+        color -> the font color
+
+        background -> the font background (color?)
         """
 
         self._text = kw.get('text', '')
@@ -148,7 +156,6 @@ class Text:
         assert isinstance(value, (Color, tuple, list)), 'new background must be a Color/RBG tuple or list'
         self._background = value
         self._needs_render_update = True
-
 
 
 class FontCache:

@@ -25,7 +25,6 @@ class Button:
     def draw(self, color=None, width=0):
         draw_rect(to_color(color or self.color), *self.pos, self.width, self.height, width)
 
-
 # def button(text: str, rect: Rect, normal_color: Union[Color, Tuple[int, int, int]],
 #            hovered_color: Union[Color, Tuple[int, int, int]], onclick=None, onhover=None):
 #     draw_rect()
