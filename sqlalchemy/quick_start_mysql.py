@@ -2,7 +2,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine, orm, Column, Integer, String, Float, exists
 from contextlib import contextmanager
 
-
 # pip install mysql-connector-python
 # mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>
 #                             connector_to_use  user pass host      database
