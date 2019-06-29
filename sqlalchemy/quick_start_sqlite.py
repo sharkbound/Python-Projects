@@ -4,12 +4,12 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# super class base for all table models
-Base = declarative_base()
-
 # create a engine to execute sql queries
 # for a file, use file.sqlite instead of :memory:
 engine = create_engine('sqlite:///:memory:')
+
+# super class base for all table models
+Base = declarative_base(bind=engine)
 
 # session generator
 Session = sessionmaker(bind=engine)
