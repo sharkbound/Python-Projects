@@ -5,9 +5,13 @@ from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///:memory:')
+engine = create_engine('sqlite:///:memory:', echo=False)
 Base = declarative_base(bind=engine)
 Session = sessionmaker(bind=engine)
+
+
+def new_id():
+    return Column(Integer, primary_key=True)
 
 
 @contextmanager
@@ -17,46 +21,69 @@ def session():
         yield s
         s.commit()
     except Exception as e:
-        print(f'error occurred: {e}')
-        print_exc()
-        s.rollback()
+        raise
     finally:
         s.close()
 
 
-class Bank(Base):
-    __tablename__ = 'bank'
+class Weapon(Base):
+    def __init__(self, id):
+        super().__init__(id=id)
 
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.balance'), nullable=False, unique=True)
-    balance = Column(Integer, nullable=False, default=100)
+    __tablename__ = 'weapons'
+
+    id = Column(String(255), primary_key=True)
+    users = relationship('Player')
 
     def __repr__(self):
-        return f'<Bank user_id={self.user_id} balance={self.balance}>'
+        return f'<Weapon {self.id}>'
 
 
-class User(Base):
-    __tablename__ = 'users'
+class Armor(Base):
+    def __init__(self, id):
+        super().__init__(id=id)
 
-    id = Column(Integer, primary_key=True)
+    __tablename__ = 'armors'
+
+    id = Column(String(255), primary_key=True)
+    users = relationship('Player')
+
+    def __repr__(self):
+        return f'<Armor {self.id}>'
+
+
+class Player(Base):
+    def __init__(self, name, weapon_id=None, armor_id=None):
+        super().__init__(name=name, weapon_id=weapon_id, armor_id=armor_id)
+
+    __tablename__ = 'players'
+
+    id = new_id()
     name = Column(String(255), nullable=False, unique=True)
-    # balance = relationship('Bank', back_ref=)
+    weapon_id = Column(String(255), ForeignKey('weapons.id'), nullable=True)
+    armor_id = Column(String(255), ForeignKey('armors.id'), nullable=True)
 
-    balance = Column(Integer, ForeignKey('bank.user_id'))
-    a = relationship('Bank', backref=backref('users'))
+    weapon: 'Weapon' = relationship('Weapon')
+    armor: 'Armor' = relationship('Armor')
 
-    def __str__(self):
-        return f'<User name={self.name} balance={self.balance}>'
+    def __repr__(self):
+        return f'<Player {self.name}>'
 
 
 Base.metadata.create_all()
 
-name = 'james'
 with session() as s:
-    user = User(name=name)
-    s.add(user)
+    for weapon in ('axe', 'spear', 'pike', 'sword'):
+        s.add(Weapon(weapon))
+
+    for armor in ('dragon', 'melee', 'magic', 'summoner'):
+        s.add(Armor(armor))
+
+p = Player('james', armor_id='dragon')
+p2 = Player('james2')
+with session() as s:
+    s.add(p)
+    s.add(p2)
     s.commit()
 
-    s.add(Bank(user_id=user.id))
-    print(user.balance)
-    print(s.query(Bank).all())
+    print(p.has_armor)
