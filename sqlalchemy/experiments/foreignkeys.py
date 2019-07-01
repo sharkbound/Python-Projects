@@ -5,9 +5,18 @@ from sqlalchemy import *
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite:///:memory:', echo=False)
+engine = create_engine('sqlite:///:memory:')
 Base = declarative_base(bind=engine)
 Session = sessionmaker(bind=engine)
+
+
+def auto_str(cls):
+    def __str__(self):
+        values = ' '.join(f'{k}={v!r}' for k, v in self.__dict__.items() if not k.startswith('_'))
+        return f'<{self.__class__.__name__} {values}>'
+
+    cls.__str__ = __str__
+    return cls
 
 
 def new_id():
@@ -52,6 +61,7 @@ class Armor(Base):
         return f'<Armor {self.id}>'
 
 
+@auto_str
 class Player(Base):
     def __init__(self, name, weapon_id=None, armor_id=None):
         super().__init__(name=name, weapon_id=weapon_id, armor_id=armor_id)
@@ -80,10 +90,13 @@ with session() as s:
         s.add(Armor(armor))
 
 p = Player('james', armor_id='dragon')
-p2 = Player('james2')
+p2 = Player('james2', armor_id='melee')
+
 with session() as s:
     s.add(p)
     s.add(p2)
     s.commit()
 
-    print(p.has_armor)
+    print('P1 ARMOR:', p.armor)
+    print('P2 ARMOR:', p2.armor)
+    print(p)

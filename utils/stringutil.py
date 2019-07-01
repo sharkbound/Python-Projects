@@ -17,11 +17,10 @@ def trim_margin(string: str, margin: str = '|'):
     )
 
 
-print(
-    trim_indent(
-        '''
-            HI
-        hello!
-        '''
-    )
-)
+def auto_str(cls):
+    def __str__(self):
+        values = ' '.join(f'{k}={v!r}' for k, v in self.__dict__.items() if not k.startswith('_'))
+        return f'<{self.__class__.__name__} {values}>'
+
+    cls.__str__ = __str__
+    return cls
