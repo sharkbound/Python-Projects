@@ -12,6 +12,15 @@ def _parse_cmd(text):
 
 
 class command:
+    """
+    usage:
+
+    >>> class MyScreen(Screen):
+    >>>     @command('version')
+    >>>     def version(self, *args):
+    >>>         # code
+    """
+
     def __init__(self, name: str, desc: str = 'no description'):
         self.desc = desc
         self.name = name
@@ -103,14 +112,16 @@ class ScreenManager:
             screen = get_screen(screen)
 
         if screen is None:
-            raise ValueError(f'cannot find screen with id: {screen}')
+            raise ValueError(f'cannot find screen with id: {id}')
 
-        if self.history and not screen.can_enter(self.current) or self.history and not self.current.can_leave(screen):
+        if not self.history:
+            self.history.append(screen)
+        elif not self.current.can_leave(screen) or not screen.can_enter(self.current):
             return
-
-        self.history.append(screen)
-        self.current.on_leave()
-        screen.on_enter()
+        else:
+            screen.on_enter()
+            self.history.append(screen)
+            self.current.on_leave()
 
     def back(self):
         if self.history[-2].can_enter(self.current):
@@ -152,27 +163,3 @@ def get_screen(id: str, default=None) -> 'Screen':
 
 screens: Dict[str, Screen] = {}
 mgr = ScreenManager()
-
-
-class MainMenu(Screen):
-    name = 'Billy'
-    id = '1'
-
-    def can_leave(self, dest: 'Screen'):
-        return False
-
-    @command('test')
-    def cmd_test(self, *args):
-        mgr.goto('2')
-
-
-class Other(Screen):
-    name = 'Other'
-    id = '2'
-
-    @command('test2')
-    def cmd_test(self, *args):
-        mgr.goto('1')
-
-
-mgr.run(MainMenu())

@@ -61,7 +61,6 @@ class Armor(Base):
         return f'<Armor {self.id}>'
 
 
-@auto_str
 class Player(Base):
     def __init__(self, name, weapon_id=None, armor_id=None):
         super().__init__(name=name, weapon_id=weapon_id, armor_id=armor_id)
@@ -78,6 +77,9 @@ class Player(Base):
 
     def __repr__(self):
         return f'<Player {self.name}>'
+
+    def __str__(self):
+        return f'<Player name={self.name!r} weapon_id={self.weapon_id!r} weapon={self.weapon!r} armor_id={self.armor_id!r} armor={self.armor!r}>'
 
 
 Base.metadata.create_all()
@@ -97,6 +99,5 @@ with session() as s:
     s.add(p2)
     s.commit()
 
-    print('P1 ARMOR:', p.armor)
-    print('P2 ARMOR:', p2.armor)
     print(p)
+    print(p2)
