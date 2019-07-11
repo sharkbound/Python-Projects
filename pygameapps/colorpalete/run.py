@@ -1,13 +1,15 @@
 import re
-from typing import Union, Tuple, Optional
+from typing import Union, Tuple, Optional, TypeVar
 
 from pygame_util import *
 
 setup()
 
+ColorType = TypeVar('ColorType', Tuple[int, int, int, ...], Color, str)
+
 
 class Colors:
-    def __init__(self, *colors: Union[Tuple[int, int, int, ...], Color]):
+    def __init__(self, *colors: ColorType):
         self.colors: List[Color] = list(map(self._ensure_color, colors))
 
     def add(self, color):
@@ -16,8 +18,15 @@ class Colors:
     def add_all(self, *colors):
         self.colors.extend(map(self._ensure_color, colors))
 
+    def extend(self, iterable: Iterable[ColorType]):
+        for item in iterable:
+            if isinstance(item, Iterable):
+                self.extend(item)
+            else:
+                self.colors.append(self._ensure_color(item))
+
     def _is_hex(self, value):
-        return isinstance(value, str) and '#' in value and re.match('^#[a-zA-Za-fA-F]{6}|[a-zA-Za-fA-F]{8}$', value)
+        return isinstance(value, str) and '#' in value and re.match('^#(?P<hex>[1-9a-fA-F]{8}|[1-9a-fA-F]{6})$', value)
 
     def _ensure_color(self, value) -> Color:
         if isinstance(value, Color):
