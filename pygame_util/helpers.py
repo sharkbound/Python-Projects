@@ -333,13 +333,14 @@ def draw_aaline(color, startpos, endpos, blend=1):
 # -------
 def to_color(*args):
     if len(args) == 1:
-        if isinstance(args[0], Color):
-            return args[0]
-        elif isinstance(args[0], str):
-            return Color(args[0])
-        elif isinstance(args[0], (tuple, list)):
-            return Color(*args[0])
-        raise TypeError(f'invalid type: {type(args[0])}')
+        value = args[0]
+        if isinstance(value, Color):
+            return value
+        elif isinstance(value, str):
+            return Color(value)
+        elif isinstance(value, (tuple, list)):
+            return Color(*value)
+        raise TypeError(f'invalid type: {type(value)}')
     elif len(args) >= 3:
         return Color(*args)
     raise ValueError(f'invalid length for *args at to_color(): {len(args)}, expected: 1 or 3+')
@@ -384,7 +385,7 @@ def rsin(x):
 
 
 def randforce(min_force, max_force):
-    return (uniform(min_force, max_force), uniform(min_force, max_force))
+    return uniform(min_force, max_force), uniform(min_force, max_force)
 
 
 # ------
