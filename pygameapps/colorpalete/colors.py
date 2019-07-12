@@ -1,6 +1,6 @@
 import re
+from itertools import chain
 from typing import Tuple, List, Iterable, Union, Dict, Any
-
 from pygame import Color
 
 ColorType = Union[
@@ -17,23 +17,18 @@ class Colors:
         self.colors: List[Color] = list(map(self._ensure_color, colors))
         self.named: Dict[Any, Color] = {name: self._ensure_color(value) for name, value in named.items()}
 
-    def add(self, color):
+    def append(self, color):
         self.colors.append(self._ensure_color(color))
 
-    def add_all(self, *colors):
+    def append_all(self, *colors: ColorType):
         self.colors.extend(map(self._ensure_color, colors))
 
-    def add_named(self, key, value):
-        self.add(value)
+    def add_named(self, key, value: ColorType):
         self.named[key] = self._ensure_color(value)
 
     def add_named_all(self, *pairs: Tuple[Any, ColorType], **named: ColorType):
-        if pairs:
-            for key, value in pairs:
-                self.add_named(key, value)
-        if named:
-            for key, value in named.items():
-                self.add_named(key, value)
+        for key, value in chain(pairs, named.items()):
+            self.add_named(key, value)
 
     def extend(self, iterable: Iterable[ColorType]):
         for item in iterable:
@@ -82,6 +77,9 @@ class Colors:
             self.colors.insert(key, value)
         self.named[key] = self._ensure_color(value)
 
+    def __getattr__(self, item):
+        return self.named[item]
+
     def __iter__(self):
         yield from self.colors
 
@@ -89,7 +87,16 @@ class Colors:
         return len(self.colors)
 
     def __str__(self):
-        return f'<{self.__class__.__name__}\n\tnamed={self.named!r}\n\tpositional={self.colors!r}>'
+        named_colors = '\n\t'.join(f'{k}={v}' for k, v in self.named.items()) if self.named else ''
+        unnamed_colors = '\n\t\t'.join(f'{i}: {v}' for i, v in enumerate(map(repr, self.colors)))
+        return f'<{self.__class__.__name__}\n\t{named_colors}\n\tunamed:\n\t\t{unnamed_colors}\n{self.__class__.__name__}>'
 
     def __repr__(self):
         return f'<{self.__class__.__name__} len={len(self)}>'
+
+
+x = Colors(red=(1, 1, 1))
+x.append('#ff00ff00')
+x.append_all('green', 'blue', (1, 200, 255, 100))
+x.add_named_all(('red', (1, 1, 100, 1)), blue='#badc0d')
+print(x)
