@@ -6,13 +6,6 @@ class DotDict(OrderedDict):
     _missing: 'DotDict' = None
 
     def __getattr__(self, item):
-        if item in self.__dict__:
-            return self.__dict__[item]
-
-        if item not in self:
-            self[item] = DotDict()
-            return self[item]
-
         return self[item]
 
     def __setattr__(self, key, value):
