@@ -1,4 +1,6 @@
+import json
 import pprint
+from copy import deepcopy
 
 
 class MissingValue:
@@ -69,9 +71,9 @@ class JsonWrapper:
         return self._wrap(item, value if value is not None else MISSING_VALUE)
 
     def __getattr__(self, item):
-        if item in self.__dict__:
-            return self.__dict__[item]
-
+        # prevent deepcopy infinite recursion
+        if item in {'__deepcopy__', '__getstate__', '__setstate__'}:
+            raise AttributeError
         return self._get_value(item)
 
     def __getitem__(self, item):
@@ -117,17 +119,29 @@ def has_value(value):
     """
     return value is not MISSING_VALUE
 
-# def test():
-#     data = JsonWrapper({
-#         'bio': r'¯\_(ツ)_/¯',
-#         'photos': [
-#             {
-#                 'url': 'url here'
-#             }
-#         ]
-#     })
-#
-#     assert data.photos[0].url == 'url here'
-#     assert data.photos[100].url is MISSING_VALUE
-#     assert data.bio == r'¯\_(ツ)_/¯'
-#     assert data.missing is MISSING_VALUE
+
+def to_json(wrapper: JsonWrapper, indent=2) -> str:
+    return json.dumps(to_raw(wrapper), indent=indent)
+
+
+def to_min_json(wrapper: JsonWrapper) -> str:
+    return json.dumps(to_raw(wrapper))
+
+
+def to_raw(wrapper: JsonWrapper) -> dict:
+    if wrapper is None:
+        return {}
+    return _get_raw_type(deepcopy(wrapper._data))
+
+
+def _get_raw_type(value):
+    if isinstance(value, JsonWrapper):
+        return _get_raw_type(value._data)
+    elif isinstance(value, dict):
+        for k, v in value.items():
+            value[k] = _get_raw_type(v)
+    elif isinstance(value, list):
+        for i, v in enumerate(value):
+            value[i] = _get_raw_type(v)
+
+    return value
