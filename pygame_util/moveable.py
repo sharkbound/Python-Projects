@@ -6,8 +6,8 @@ from pygame_util.helpers import *
 
 class Moveable:
     def __init__(self, pos=(), color=()):
-        self._pos = Point(pos or random_pos())
-        self.last = Point(self.x, self.y)
+        self._pos = Vector2(pos or random_pos())
+        self.last = Vector2(self.x, self.y)
         self.color = color or random_color()
 
     @property
@@ -28,7 +28,7 @@ class Moveable:
 
     @property
     def pos(self):
-        return Point(*self._pos)
+        return Vector2(*self._pos)
 
     @pos.setter
     def pos(self, value):
@@ -45,12 +45,14 @@ class Moveable:
         if self.last != self._pos:
             self.last.x, self.last.y = self.x, self.y
 
-        if not new_x: new_x = self.x
-        if not new_y: new_y = self.y
+        if new_x is None:
+            new_x = self.x
+        if new_y is None:
+            new_y = self.y
 
-        if offx or offy:
-            new_x = self.x + (offx or 0)
-            new_y = self.y + (offy or 0)
+        if offx is not None or offy is not None:
+            new_x = self.x + (offx if offx is not None else 0)
+            new_y = self.y + (offy if offy is not None else 0)
 
         self._pos.x, self._pos.y = new_x, new_y
         if check:
@@ -65,19 +67,19 @@ class Moveable:
     def distance(self, other):
         return self._pos.distance_to(other)
 
-    def draw_rect(self, len_x=1, len_y=1, width=0, color=None):
-        draw_rect(color or self.color, *self._pos, len_x, len_y, width)
-
-    def draw_line(self, dest, width=1, color=None):
-        draw_line(color or self.color, self._pos, dest, width)
-
-    def draw_circle(self, radius, width=0, color=None):
-        draw_circle(color or self.color, [int(x) for x in self._pos], int(radius), int(width))
-
-    def draw_poly(self, pointlist, width=0, color=None, relative=False):
-        if relative:
-            pointlist = [(self[0] + x[0], self[1] + x[1]) for x in pointlist]
-        draw_poly(color or self.color, [self._pos] + pointlist, width)
+    # def draw_rect(self, len_x=1, len_y=1, width=0, color=None):
+    #     draw_rect(color or self.color, *self._pos, len_x, len_y, width)
+    #
+    # def draw_line(self, dest, width=1, color=None):
+    #     draw_line(color or self.color, self._pos, dest, width)
+    #
+    # def draw_circle(self, radius, width=0, color=None):
+    #     draw_circle(color or self.color, self._pos, int(radius), int(width))
+    #
+    # def draw_poly(self, pointlist, width=0, color=None, relative=False):
+    #     if relative:
+    #         pointlist = [(self[0] + x[0], self[1] + x[1]) for x in pointlist]
+    #     draw_poly(color or self.color, [self._pos] + pointlist, width)
 
     def __getitem__(self, item):
         if item == 'x' or item == 0:

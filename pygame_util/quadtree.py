@@ -3,7 +3,7 @@ from random import randrange
 
 import numpy as np
 from pygame import Rect, Color
-from .colors import white, green, blue
+from .colors_presets import white, green, blue
 from .helpers import render_rect, draw_circle
 from typing import List
 

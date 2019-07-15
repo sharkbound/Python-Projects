@@ -1,15 +1,12 @@
 import copy
-from random import *
 from decimal import Decimal
+from random import *
+from typing import Tuple
 
-from math import cos, radians, sin
-from typing import Union, Tuple
-
-from pygame.event import Event
-from pygame.math import Vector2
-
-from pygame import *
 import pygame
+from math import cos, radians, sin
+from pygame import *
+from pygame.math import Vector2
 
 from pygame_util import settings
 
