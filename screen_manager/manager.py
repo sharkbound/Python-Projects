@@ -1,4 +1,5 @@
 import traceback
+from inspect import ismethod, isfunction
 from typing import List, Dict, Callable, Union, Any
 from shlex import split
 
@@ -19,12 +20,23 @@ class command:
     >>>     @command('version')
     >>>     def version(self, *args):
     >>>         # code
+    or:
+    >>> class MyScreen(Screen):
+    >>>     @command
+    >>>     def version(self, *args):
+    >>>         # code
     """
 
-    def __init__(self, name: str, desc: str = 'no description'):
+    func: Callable[[List[str]], None]
+
+    def __init__(self, name_or_func, desc: str = 'no description'):
         self.desc = desc
-        self.name = name
-        self.func: Callable[[List[str]], None] = lambda *_, **__: None
+        if isfunction(name_or_func) or ismethod(name_or_func):
+            self.func = name_or_func
+            self.name = name_or_func.__name__
+        else:
+            self.name = name_or_func
+            self.func = lambda *_, **__: None
 
     def execute(self, *args):
         self.func(*args)
