@@ -187,8 +187,9 @@ def random_pos_vect(padding=1) -> Vector2:
     return Vector2(random_pos(padding))
 
 
-def random_color():
-    return Color(randrange(256), randrange(256), randrange(256))
+# noinspection PyArgumentList
+def random_color(rand_alpha=True):
+    return Color(randrange(256), randrange(256), randrange(256), randrange(256) if rand_alpha else 255)
 
 
 def update():

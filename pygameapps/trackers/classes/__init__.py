@@ -1,2 +1,2 @@
+from .position import *
 from .marker import *
-from .position import Position
