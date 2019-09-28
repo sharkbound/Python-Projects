@@ -34,4 +34,6 @@ alt + up or down : jump to functions
 ctrl + j : view templates for current context
 alt + f5 : debug current
 ctrl + alt + insert : create new file in current open files directory
-vtrl + shift + e : recent locations
+ctrl + shift + e : recent locations
+alt + home : navigate file tree bar
+ctrl + alt + f12 : collapse/hide all windows
