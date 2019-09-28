@@ -37,3 +37,7 @@ ctrl + alt + insert : create new file in current open files directory
 ctrl + shift + e : recent locations
 alt + home : navigate file tree bar
 ctrl + alt + f12 : collapse/hide all windows
+f11 : bookmark line in file
+ctrl + f11 : bookmark with mnemonic
+shift + f11 : show bookmarks (use backspace to delete selected bookmark)
+
