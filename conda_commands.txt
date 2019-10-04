@@ -1,0 +1,24 @@
+SOURCE:
+	https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/
+
+create env: 
+	conda create -m NAME_HERE python=X.X
+
+delete env:
+	conda remove -n ENV_HERE -all
+
+list env:
+	conda env list
+
+list python versions:
+	conda search "^python$"
+
+activate env:
+	conda activate ENV_HERE
+
+deactivate env:
+	conda deactivate ENV_HERE
+
+manages packages in activated env:
+	conda install/uninstall PACKAGE
+	(use pip if conda does not have it in its registery)
