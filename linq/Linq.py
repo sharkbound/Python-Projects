@@ -74,12 +74,12 @@ class Query:
 
     def flatten(self):
         """flattens current values to all be in a single query"""
-        return Query(self.__flatten(self))
+        return Query(self._flatten(self))
 
-    def __flatten(self, x):
+    def _flatten(self, x):
         if isinstance(x, Iterable) and not isinstance(x, (str, bytes)):
             for item in x:
-                yield from self.__flatten(item)
+                yield from self._flatten(item)
         else:
             yield x
 
@@ -150,6 +150,7 @@ class Query:
 
     def similar(self, items):
         """returns a Query with all items that are the same between the 2 iterables"""
+
         def _sim():
             for v in self:
                 if v in items:
@@ -159,6 +160,7 @@ class Query:
 
     def different(self, items):
         """returns a query with all items that are different between the 2 iterables"""
+
         def _diff():
             for v in self:
                 if v not in items:
