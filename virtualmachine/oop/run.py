@@ -1,4 +1,4 @@
-from virtualmachine.vm import *
+from virtualmachine.oop.vm import *
 
 program = Program()
 program.run([
