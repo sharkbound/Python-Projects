@@ -53,11 +53,12 @@ class JumpIfTrue(Jump):
 
 
 class Display(OP):
-    def __init__(self):
+    def __init__(self, newline=True):
         super().__init__(pop_argc=1)
+        self.newline = newline
 
     def execute(self, program: 'Program', args: Deque):
-        print(program.pop())
+        print(program.pop(), end='\n' if self.newline else '')
         return DEFAULT_RESULT
 
 
