@@ -1,39 +1,41 @@
 from collections import deque
-from enum import Enum
+from enum import Enum, auto
 
 from random import choice, shuffle
 
+
 # noinspection PyArgumentList
-(
-    JUMP,
-    DISPLAY,
-    PUSH,
-    POP,
-    LABEL,
-    JUMP_IF_TRUE,
-    JUMP_IF_FALSE,
-    PUSH_RANDOM,
-    SHUFFLE,
-    BRANCH_IF_TRUE,
-    EXIT,
-    PUSH_RANDOM_BOOL,
-    SHOW,
-    BRANCH_IF_FALSE,
-    SHOW_STACK,
-) = Enum('OPCODE',
-         [
-             'JUMP', 'DISPLAY', 'PUSH', 'POP', 'LABEL', 'JUMP_IF_TRUE', 'JUMP_IF_FALSE', 'PUSH_RANDOM',
-             'SHUFFLE', 'BRANCH_IF_TRUE', 'EXIT', 'PUSH_RANDOM_BOOL', 'SHOW', 'BRANCH_IF_FALSE', 'SHOW_STACK'
-         ])
+class OP(Enum):
+    JUMP = auto()
+    DISPLAY = auto()
+    PUSH = auto()
+    POP = auto()
+    LABEL = auto()
+    JUMP_IF_TRUE = auto()
+    JUMP_IF_FALSE = auto()
+    PUSH_RANDOM = auto()
+    SHUFFLE = auto()
+    BRANCH_IF_TRUE = auto()
+    EXIT = auto()
+    PUSH_RANDOM_BOOL = auto()
+    PRINT_JOIN = auto()
+    BRANCH_IF_FALSE = auto()
+    SHOW_STACK = auto()
+    STORE = auto()
+    LOAD = auto()
+    DUPLICATE = auto()
+    PRINT = auto()
+    CLEAR = auto()
 
 
 def safe_get(items, index, default):
     return items[index] if 0 <= index < len(items) else default
 
 
-def run(*codes):
+def run(codes):
     stack = deque()
     labels = {}
+    variables = {}
 
     def pop():
         return stack.pop()
@@ -42,44 +44,54 @@ def run(*codes):
         stack.append(value)
 
     for i, (opcode, *args) in enumerate(codes):
-        if opcode is LABEL:
+        if opcode is OP.LABEL:
             labels[args[0]] = i
 
     codes_length = len(codes)
     ptr = 0
     while 0 <= ptr < codes_length:
         code, *args = codes[ptr]
-        if code is JUMP:
+        if code is OP.JUMP:
             ptr = labels[args[0]]
             continue
-        elif code is PUSH:
+        elif code is OP.PUSH:
             push(args[0])
-        elif code is POP:
+        elif code is OP.POP:
             pop()
-        elif code is DISPLAY:
+        elif code is OP.DISPLAY:
             print(pop(), end='\n' if safe_get(args, 0, True) else '')
-        elif code is JUMP_IF_TRUE:
+        elif code is OP.JUMP_IF_TRUE:
             if pop():
                 ptr = labels[args[0]]
-        elif code is JUMP_IF_FALSE:
+        elif code is OP.JUMP_IF_FALSE:
             if not pop():
                 ptr = labels[args[0]]
-        elif code is PUSH_RANDOM:
+        elif code is OP.PUSH_RANDOM:
             push(choice(args))
-        elif code is SHUFFLE:
+        elif code is OP.SHUFFLE:
             shuffle(stack)
-        elif code is BRANCH_IF_TRUE:
+        elif code is OP.BRANCH_IF_TRUE:
             ptr = labels[args[0] if pop() else args[1]]
-        elif code is BRANCH_IF_FALSE:
+        elif code is OP.BRANCH_IF_FALSE:
             ptr = labels[args[0] if not pop() else args[1]]
-        elif code is EXIT:
+        elif code is OP.EXIT:
             quit(0)
-        elif code is PUSH_RANDOM_BOOL:
+        elif code is OP.PUSH_RANDOM_BOOL:
             push(choice((True, False)))
-        elif code is SHOW:
+        elif code is OP.PRINT_JOIN:
             print(' '.join(args))
-        elif code is SHOW_STACK:
-            if stack:
-                print(list(stack))
-        # print(stack)
+        elif code is OP.SHOW_STACK:
+            print(list(stack))
+        elif code is OP.STORE:
+            variables[args[0]] = pop()
+        elif code is OP.LOAD:
+            push(variables[args[0]])
+        elif code is OP.DUPLICATE:
+            value = pop()
+            push(value)
+            push(value)
+        elif code is OP.PRINT:
+            print(args[0], end='\n' if safe_get(args, 1, True) else '')
+        elif code is OP.CLEAR:
+            del variables[args[0]]
         ptr += 1
