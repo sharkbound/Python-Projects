@@ -172,7 +172,7 @@ class ScreenManager:
 
             if cmd.lower() in current.cmds:
                 try:
-                    current.cmds[cmd].execute(*args)
+                    current.cmds[cmd.lower()].execute(*args)
                 except Exception as e:
                     print(f'"{current.id}" raised exception "{e}" of type {type(e)} when executing command {cmd}')
                     traceback.print_exc()
