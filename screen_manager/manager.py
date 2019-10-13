@@ -1,6 +1,7 @@
 import traceback
+from collections import defaultdict
 from inspect import ismethod, isfunction
-from typing import List, Dict, Callable, Union, Any
+from typing import List, Dict, Callable, Union, Any, DefaultDict
 from shlex import split
 
 
@@ -49,12 +50,12 @@ class command:
 class Screen:
     id: str
     name: str = 'MISSING NAME'
-
+    mgr: 'ScreenManager' = None
     cmds: Dict[str, command]
 
     def __init_subclass__(cls, **kwargs):
         if cls.__init__.__code__.co_argcount == 1:
-            screens[cls.id] = cls()
+            cls.mgr.screens[cls.id] = cls()
 
     def __init__(self):
         self.cmds = {}
@@ -110,9 +111,17 @@ class Screen:
 
 
 class ScreenManager:
+    _lastid = 0
+
     def __init__(self):
         self.history: List[Screen] = []
         self.running = True
+        self.id = self.__class__._lastid
+        self.screens: Dict[str, Screen] = {}
+        self.__class__._lastid += 1
+
+    def get_screen(self, id: str, default=None) -> Screen:
+        return self.screens.get(id, default)
 
     @property
     def current(self) -> Screen:
@@ -121,7 +130,7 @@ class ScreenManager:
     def goto(self, screen: Union[str, Screen]):
         id = screen
         if isinstance(screen, str):
-            screen = get_screen(screen)
+            screen = self.get_screen(screen)
 
         if screen is None:
             raise ValueError(f'cannot find screen with id: {id}')
@@ -167,11 +176,3 @@ class ScreenManager:
                 except Exception as e:
                     print(f'"{current.id}" raised exception "{e}" of type {type(e)} when executing command {cmd}')
                     traceback.print_exc()
-
-
-def get_screen(id: str, default=None) -> 'Screen':
-    return screens.get(id, default)
-
-
-screens: Dict[str, Screen] = {}
-mgr = ScreenManager()
