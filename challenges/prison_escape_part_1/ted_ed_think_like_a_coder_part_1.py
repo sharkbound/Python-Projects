@@ -25,8 +25,9 @@ class Lock:
         self.current_position = 1
         self.state = State.red
         self.recorded_dial_position = self.current_position
+        self.step_count = 0
 
-    def rotate(self, rotation: int):
+    def spin(self, rotation: int):
         self.current_position = (self.current_position + rotation) % self.POSITION_COUNT
         if not self.current_position:
             if rotation < 1:
@@ -34,19 +35,22 @@ class Lock:
             else:
                 self.current_position = 1
 
+        if rotation:
+            self.step_count += 1
+
     def record(self):
         self.recorded_dial_position = self.current_position
+        self.step_count += 1
 
+    @property
     def recorded(self):
         return self.recorded_dial_position
 
-    def check_green(self):
-        return self.state is State.green
-
-    def check_red(self):
-        return self.state is State.red
+    @property
+    def unlocked(self):
+        return self.current_position == self.correct_position
 
 
 lock = Lock()
-print(lock)
-print(lock.rotate(101))
+while not lock.unlocked:
+    lock.spin(1)
