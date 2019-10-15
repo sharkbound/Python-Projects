@@ -1,3 +1,6 @@
+from typing import Union, Callable, List, Tuple, Set
+
+
 def _get_indent(s: str):
     return len(s) - len(s.lstrip())
 
@@ -24,3 +27,31 @@ def auto_str(cls):
 
     cls.__str__ = __str__
     return cls
+
+
+def auto_str_filtered(is_valid):
+    if isinstance(is_valid, (list, tuple, set)):
+        if any(map(callable, is_valid)):
+            is_valid_filter = lambda attribute: \
+                any(((callable(item) and item(attribute))
+                     or (isinstance(item, (list, set, tuple)) and attribute in item)
+                     or item == attribute)
+                    for item in is_valid)
+        else:
+            is_valid_filter = is_valid.__contains__
+
+    elif callable(is_valid):
+        is_valid_filter = is_valid
+    else:
+        is_valid_filter = is_valid
+
+    def _auto_str_inner(cls):
+        def __str__(self):
+            pairs = ' '.join(
+                f'{k}={v!r}' for k, v in self.__dict__.items() if not k.startswith('_') and is_valid_filter(k))
+            return f'<{self.__class__.__name__} {pairs}>'
+
+        cls.__str__ = __str__
+        return cls
+
+    return _auto_str_inner
