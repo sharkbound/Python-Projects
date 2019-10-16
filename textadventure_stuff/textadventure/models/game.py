@@ -5,8 +5,9 @@ from random import choice
 from textadventure.util import *
 
 HELP_MSG = """Commands: 
+look -> tells you about your current room
 inspect {object_name} -> inspects a object
-interact {object_name} -> interacts with a object
+interact {object_name} -> interacts with a object, doing just `interact` will show interactive objects
 help -> show this menu"""
 
 INVALID_MSGS = [
