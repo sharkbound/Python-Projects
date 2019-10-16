@@ -1,7 +1,7 @@
 from typing import Dict, Callable
 
 from data import MenuAction
-from util import chunk
+from textadventure.util import chunk
 
 
 class Menu:

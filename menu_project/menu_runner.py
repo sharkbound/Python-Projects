@@ -1,6 +1,6 @@
 from data import MenuAction
 from menus import Menu
-from util import str_to_args
+from textadventure.util import str_to_args
 
 
 def run_menu(base_menu: Menu):

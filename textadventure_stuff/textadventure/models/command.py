@@ -1,4 +1,4 @@
-from enums import CommandType
+from textadventure.enums import CommandType
 from shlex import split
 
 dir_dict = {

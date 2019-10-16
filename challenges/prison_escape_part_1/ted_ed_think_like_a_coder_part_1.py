@@ -27,6 +27,9 @@ class Lock:
         self.recorded_dial_position = self.current_position
         self.step_count = 0
 
+    def _inc_step(self):
+        self.step_count += 1
+
     def spin(self, rotation: int):
         self.current_position = (self.current_position + rotation) % self.POSITION_COUNT
         if not self.current_position:
@@ -36,11 +39,11 @@ class Lock:
                 self.current_position = 1
 
         if rotation:
-            self.step_count += 1
+            self._inc_step()
 
     def record(self):
         self.recorded_dial_position = self.current_position
-        self.step_count += 1
+        self._inc_step()
 
     @property
     def recorded(self):
@@ -54,3 +57,4 @@ class Lock:
 lock = Lock()
 while not lock.unlocked:
     lock.spin(1)
+print(lock.step_count)

@@ -1,6 +1,6 @@
 from typing import List
 
-from enums import Direction
+from textadventure.enums import Direction
 from .command import Command
 from .interactable import Interactable
 

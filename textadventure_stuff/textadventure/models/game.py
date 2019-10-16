@@ -1,8 +1,8 @@
-from enums import CommandType, Direction
+from textadventure.enums import CommandType, Direction
 from rooms.starting_room import StartingRoom
 from .command import Command
 from random import choice
-from util import *
+from textadventure.util import *
 
 HELP_MSG = """Commands: 
 inspect {object_name} -> inspects a object
@@ -31,7 +31,11 @@ class Game:
 
     def run(self):
         while self.running:
-            cmd = Command(self.current.input)
+            entered_input = self.current.input.strip()
+            if not entered_input:
+                continue
+
+            cmd = Command(entered_input)
             if cmd.type is CommandType.INVALID:
                 print(choice(INVALID_MSGS))
                 continue

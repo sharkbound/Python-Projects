@@ -1,5 +1,5 @@
-from models import Room
-from util import register_room
+from textadventure.models import Room
+from textadventure.util import register_room
 
 
 class ConnectedRoom(Room):
@@ -15,6 +15,7 @@ class ConnectedRoom(Room):
 
     def on_leave(self):
         print('you left the connected room')
+
 
 def setup():
     register_room(ConnectedRoom())

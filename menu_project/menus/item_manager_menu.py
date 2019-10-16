@@ -1,7 +1,6 @@
-from data import inv, print_item_row, Item, show_item_table
+from data import inv, Item, show_item_table
 from menus import Menu
-from constants import ITEM_INFO_HEADER
-from util import ask_int, ask_float
+from textadventure.util import ask_int, ask_float
 
 
 class ItemManagerMenu(Menu):

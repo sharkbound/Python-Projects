@@ -1,7 +1,7 @@
 import locale
 
 from constants import ITEM_INFO_ROW_FORMAT, ITEM_NAME_LENGTH, ITEM_BRAND_LENGTH, ITEM_INFO_HEADER
-from util import truncate
+from textadventure.util import truncate
 
 locale.setlocale(locale.LC_ALL, '')
 

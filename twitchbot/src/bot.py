@@ -2,8 +2,8 @@ import shlex
 
 from cfg import cfg
 from socket import socket
-from util import encode, decode, str_to_message
-from data import R_MESSAGE, Event, Message, commands
+from textadventure.util import encode, decode, str_to_message
+from data import Event, Message, commands
 
 
 # :userman2!userman2@userman2.tmi.twitch.tv PRIVMSG #userman2 :test

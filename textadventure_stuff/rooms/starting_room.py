@@ -1,7 +1,7 @@
 from interactables import Lamp
-from models import Room
+from textadventure.models import Room
 
-from util import register_room
+from textadventure.util import register_room
 
 
 class StartingRoom(Room):

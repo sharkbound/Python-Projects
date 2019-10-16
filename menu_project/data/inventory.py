@@ -1,5 +1,5 @@
 from .item import Item
-from util import items_to_dict
+from textadventure.util import items_to_dict
 
 
 class Inventory:

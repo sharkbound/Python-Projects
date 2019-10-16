@@ -1,4 +1,4 @@
-from models.interactable import Interactable
+from textadventure.models import Interactable
 
 
 class Lamp(Interactable):

@@ -1,5 +1,5 @@
 from typing import Any, Dict, Optional
-from models.room import Room
+from textadventure.models import Room
 
 rooms: Dict[str, Room] = {}
 
