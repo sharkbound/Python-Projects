@@ -12,6 +12,7 @@ def find_contents(data, parent, key):
     if isinstance(data, dict):
         for k, v in data.items():
             yield from find_contents(v, data, k)
+
     elif isinstance(data, list) and key == 'content' and all(isinstance(x, str) for x in data):
         yield data, parent, key
 

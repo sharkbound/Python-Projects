@@ -47,11 +47,12 @@ def to_grid_pos(p) -> Vector2:
 
 def is_in_bounds(p):
     return (
-        0 <= p.x < SCREEN_SIZE[0] and 0 <= p.y < SCREEN_SIZE[1]
+            0 <= p.x < SCREEN_SIZE[0] and 0 <= p.y < SCREEN_SIZE[1]
     )
 
+
 def get_random_apple():
-    return to_grid_pos(Vector2(randrange(1,SCREEN_SIZE[0]-1), randrange(1,SCREEN_SIZE[1]-1)))
+    return to_grid_pos(Vector2(randrange(1, SCREEN_SIZE[0] - 1), randrange(1, SCREEN_SIZE[1] - 1)))
 
 
 def get_center():
@@ -97,7 +98,7 @@ while True:
         for p in points[:-1]:
             draw.rect(SRC, [0, 100, 0], [p.x, p.y, BLOCK_SIZE, BLOCK_SIZE])
             if p == last:
-                gameover = True # player hit his tail
+                gameover = True  # player hit his tail
 
         speed += SPEED_INCREMENT
         print(speed)
