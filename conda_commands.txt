@@ -7,7 +7,7 @@ create env:
 	conda create -m "ENV_HERE" python=X.X
 
 delete env:
-	conda env remove -n ENV_HERE
+	conda env remove -n "ENV_HERE"
 
 list env:
 	conda env list
