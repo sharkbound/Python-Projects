@@ -23,4 +23,4 @@ deactivate env:
 
 manages packages in activated env:
 	conda install/uninstall PACKAGE
-	(use pip if conda does not have it in its registery)
+	(use pip if conda does not have it in its registry)
