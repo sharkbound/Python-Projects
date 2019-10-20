@@ -4,10 +4,10 @@ SOURCE:
 	https://kapeli.com/cheat_sheets/Conda.docset/Contents/Resources/Documents/index
 
 create env: 
-	conda create -m NAME_HERE python=X.X
+	conda create -m ENV_HERE python=X.X
 
 delete env:
-	conda remove -n ENV_HERE -all
+	conda env remove -n ENV_HERE
 
 list env:
 	conda env list
