@@ -15,7 +15,7 @@ def find_contents(data, parent, key):
 
     elif isinstance(data, list) and key == 'content' and all(isinstance(x, str) for x in data):
         yield data, parent, key
-
+ 
 
 def list_to_dict(data):
     def _replace(m):
