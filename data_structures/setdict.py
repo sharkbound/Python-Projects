@@ -27,9 +27,3 @@ class setdict(dict):
             if not (key in self) ^ (key in other):
                 del self[key]
         return self
-
-
-d1 = setdict(name='old name', age=17, job='baking')
-d2 = d1
-d1 ^= {'name': 'nope', 'job': 'nope again'}
-print(d1, d1 is d2)
