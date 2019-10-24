@@ -1,4 +1,5 @@
 from itertools import chain
+from typing import Union, Iterable
 
 
 class setdict(dict):
@@ -10,10 +11,10 @@ class setdict(dict):
             self[key] = value
         return self
 
-    def __and__(self, other: dict):
+    def __and__(self, other: Union[dict, Iterable[str]]):
         return setdict(pair for pair in self.items() if pair[0] in other)
 
-    def __iand__(self, other: dict):
+    def __iand__(self, other: Union[dict, Iterable[str]]):
         for key in tuple(self):
             if key not in other:
                 del self[key]
