@@ -1,3 +1,4 @@
+from inspect import isclass
 from typing import Dict, Callable
 
 from .enums import MenuAction
@@ -9,11 +10,13 @@ class Menu:
         self.commands = commands
         self.commands['back'] = lambda *_: MenuAction.go_back
 
-        self.register_local_commands()
+        self._register_local_commands()
 
-    def register_local_commands(self):
+    def _register_local_commands(self):
         for k, v in self.__class__.__dict__.items():
-            if k.startswith('do_') and callable(v):
+            if isinstance(v, named):
+                self.commands[v.name] = v.func.__get__(self)
+            elif k.startswith('do_') and callable(v):
                 self.commands[k[3:]] = getattr(self, k)
 
     def show_command_options(self):
@@ -37,3 +40,13 @@ class Menu:
 
     def pause(self):
         input('\npress enter to continue...\n')
+
+
+class named:
+    def __init__(self, name):
+        self.name = name
+        self.func = None
+
+    def __call__(self, func):
+        self.func = func
+        return self
