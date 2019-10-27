@@ -40,4 +40,4 @@ ctrl + alt + f12 : collapse/hide all windows
 f11 : bookmark line in file
 ctrl + f11 : bookmark with mnemonic
 shift + f11 : show bookmarks (use backspace to delete selected bookmark)
-
+alt + j : select next occurence of selected text

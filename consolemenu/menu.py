@@ -1,13 +1,13 @@
 from typing import Dict, Callable
 
-from data import MenuAction
-from textadventure.util import chunk
+from .enums import MenuAction
+from .util import chunk
 
 
 class Menu:
     def __init__(self, **commands: Dict[str, Callable]):
         self.commands = commands
-        self.commands['0'] = lambda *_: MenuAction.go_back
+        self.commands['back'] = lambda *_: MenuAction.go_back
 
         self.register_local_commands()
 

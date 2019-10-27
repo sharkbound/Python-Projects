@@ -6,10 +6,12 @@ k_arrow_up = 72
 k_enter = 13
 k_space = 32
 
+
 class MenuItem:
     def __init__(self, text, onselect):
         self.text = text
         self.on_select = onselect
+
 
 class Menu:
     def __init__(self, options, selected_prefix='--> '):
