@@ -1,4 +1,3 @@
-from inspect import isclass
 from typing import Dict, Callable
 
 from .enums import MenuAction
