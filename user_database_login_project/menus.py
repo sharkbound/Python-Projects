@@ -28,6 +28,8 @@ class MainMenu(Cmd):
 
         LoggedIn(user).cmdloop(f'you are logged in as {user.username}')
 
+    do_l = do_login
+
     def do_create(self, cmd):
         if len(args := split(cmd)) != 2:
             print('create must be passed the username and password for the created account')
@@ -40,6 +42,15 @@ class MainMenu(Cmd):
 
         User.new(username, password)
         print(f'created account {username}, type "login {username} PASSWORD" to login into it')
+
+    do_c = do_create
+
+    def do_list(self, _):
+        with transaction() as t:
+            for user in t.query(User):
+                print(user.username)
+
+    do_ll = do_list
 
     def do_exit(self, _):
         return True
@@ -54,13 +65,30 @@ class LoggedIn(Cmd):
         self.user = user
 
     def do_delete(self, _):
-        if not self.user.verify(input('retype your password to delete this account: ')):
-            print('passwords did not match, cancelling deletion')
+        if not self.user.ask_and_verify('retype your password to delete this account: '):
             return
 
         print(f'deleted account {self.user.username}')
         with transaction() as t:
             t.query(User).filter(User.username == self.user.username).delete()
+
+        return self.do_logout(_)
+
+    def do_rename(self, _):
+        if not self.user.ask_and_verify('retype password to change your username: '):
+            return
+
+        with transaction():
+            self.user.username = next(normalize(input('enter new username: ')))
+
+        return self.do_logout(_)
+
+    def do_password(self, _):
+        if not self.user.ask_and_verify('retype password to change your password: '):
+            return
+
+        with transaction():
+            self.user.password = hash_password(next(normalize(input('enter new password: '))))
 
         return self.do_logout(_)
 

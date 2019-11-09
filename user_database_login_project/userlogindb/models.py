@@ -33,6 +33,12 @@ class User(Base):
         password, = normalize(password)
         return self.password == hash_password(password, salt=salt)
 
+    def ask_and_verify(self, prompt, bad_password='password did not match the password on the account'):
+        verified = self.verify(input(prompt))
+        if not verified:
+            print(bad_password)
+        return verified
+
     @classmethod
     def new(cls, username, password, commit=True) -> 'User':
         username, password = normalize(username, password)
