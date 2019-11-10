@@ -55,6 +55,11 @@ class MainMenu(Cmd):
     def do_exit(self, _):
         return True
 
+    def do_admin(self, _):
+        Admin.verify_exists()
+        if User.get(Admin.admin_name).ask_and_verify('enter admin password: '):
+            Admin().cmdloop()
+
     def cmdloop(self, intro=None):
         return super().cmdloop('type "help" or "?" to view available commands')
 
@@ -94,4 +99,43 @@ class LoggedIn(Cmd):
 
     def do_logout(self, _):
         print(f'you have logged out of {self.user.username}')
+        return True
+
+
+class Admin(Cmd):
+    admin_name = 'admin'
+
+    @classmethod
+    def verify_exists(cls):
+        if not User.exists(cls.admin_name):
+            while not (password := normalize(input('enter new admin password: '))):
+                pass
+            User.new(cls.admin_name, password)
+
+    def do_delete(self, *args):
+        if not args:
+            print('missing argument: account name')
+            return
+
+        with transaction() as t:
+            username = normalize(args[0])
+            if not (user := User.get(username)):
+                print(f'no such user: {username}')
+            elif user.username == self.admin_name:
+                print('well done, you played yourself...')
+                t.query(User).filter(User.username == self.admin_name).delete()
+                return True
+            else:
+                t.query(User).filter(User.username == user.username).delete()
+                print(f'deleted user: {user.username}')
+
+    def do_list(self, _):
+        with transaction() as t:
+            for user in t.query(User):
+                print(user.username)
+
+    do_l = do_list
+
+    def do_logout(self, _):
+        print('you logged out of the admin account')
         return True

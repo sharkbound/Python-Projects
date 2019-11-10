@@ -15,11 +15,13 @@ session = None
 
 def hash_password(password, salt='SALT'):
     sha = sha3_512()
-    sha.update((salt + password + salt).encode())
+    sha.update(normalize(f'{salt}{password}{salt}').encode())
     return sha.hexdigest()
 
 
 def normalize(*texts):
+    if len(texts) == 1:
+        return texts[0].strip().lower()
     return (text.strip().lower() for text in texts)
 
 
@@ -30,7 +32,7 @@ class User(Base):
     password: str = Column(String(128), nullable=False)
 
     def verify(self, password, salt='SALT'):
-        password, = normalize(password)
+        password = normalize(password)
         return self.password == hash_password(password, salt=salt)
 
     def ask_and_verify(self, prompt, bad_password='password did not match the password on the account'):
@@ -51,13 +53,13 @@ class User(Base):
 
     @classmethod
     def exists(cls, username) -> bool:
-        username, = normalize(username)
+        username = normalize(username)
         with transaction() as t:
             return t.query(exists().where(User.username == username)).scalar()
 
     @classmethod
     def get(cls, username) -> Optional['User']:
-        username, = normalize(username)
+        username = normalize(username)
         with transaction() as t:
             return t.query(User).filter(User.username == username).one_or_none()
 
