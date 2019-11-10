@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from hashlib import sha3_512
 from typing import Optional
 
-from sqlalchemy import create_engine, Column, String, exists
+from sqlalchemy import create_engine, Column, String, exists, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -15,7 +15,7 @@ session = None
 
 def hash_password(password, salt='SALT'):
     sha = sha3_512()
-    sha.update(normalize(f'{salt}{password}{salt}').encode())
+    sha.update(f'{salt}{password}{salt}'.strip().encode())
     return sha.hexdigest()
 
 
@@ -28,7 +28,8 @@ def normalize(*texts):
 class User(Base):
     __tablename__ = 'users'
 
-    username: str = Column(String(50), primary_key=True, nullable=False, unique=True)
+    id: int = Column(Integer(), primary_key=True, autoincrement=True, nullable=False)
+    username: str = Column(String(50), nullable=False, unique=True)
     password: str = Column(String(128), nullable=False)
 
     def verify(self, password, salt='SALT'):
