@@ -23,7 +23,7 @@ def ask_float(prompt, default: Any = float) -> float:
 
 
 def ask_time_delta():
-    msg = 'enter {}[leave blank for {}]: '
+    msg = 'enter {} [leave blank for {}]: '
     return timedelta(
         weeks=ask_float(msg.format('weeks', 0)),
         days=ask_float(msg.format('days', 0)),
@@ -51,7 +51,7 @@ MONTH_NAME_TO_INT = dict(
 
 def ask_month():
     while True:
-        value = input(f'enter month[leave blank for 1/jan]: ').lower().strip()
+        value = input(f'enter month [leave blank for 1/jan]: ').lower().strip()
         if value.isnumeric():
             value = int(value)
             if 1 <= value <= 12:
@@ -61,7 +61,7 @@ def ask_month():
 
 
 def ask_date_time():
-    msg = 'enter {}[leave blank for {}]: '
+    msg = 'enter {} [leave blank for {}]: '
     return datetime(
         year=ask_int(msg.format('year', 0)),
         month=ask_month(),
@@ -78,7 +78,7 @@ def format_datetime(date: datetime):
 
 base_date = (
     datetime.now()
-    if input('use current date as base datetime?  [Y/N]: ').lower().strip() == 'y'
+    if input('use current date as base datetime? [Y/N]: ').lower().strip() == 'y'
     else ask_date_time())
 
 while True:
