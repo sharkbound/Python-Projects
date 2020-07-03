@@ -28,7 +28,6 @@ class ArtGenGame(Window):
     def on_draw(self):
         start_render()
         self.sprites.draw()
-        print(len(self.sprites))
 
     def on_mouse_scroll(self, x: int, y: int, scroll_x: int, scroll_y: int):
         self._size_modifier = max(self._size_modifier + 1 if scroll_y == 1 else -1, 1)
