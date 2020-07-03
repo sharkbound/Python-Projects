@@ -1,8 +1,8 @@
-from random import randint, uniform
-from typing import Optional, Union
+from typing import Optional
 
 from arcade import *
-from arcade import color, key, gui
+from arcade import key
+
 from util.pos import *
 
 
