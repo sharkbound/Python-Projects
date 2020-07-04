@@ -1,10 +1,8 @@
-import sys
-from random import choice, randint, choices
+from random import choice, choices
 from typing import Optional
 
 from arcade import *
-from arcade import gui, key, color
-from missile import Missile
+from arcade import color
 
 
 class ArtGenGame(Window):
