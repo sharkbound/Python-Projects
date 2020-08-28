@@ -21,10 +21,10 @@ class Missile:
     def check_collision(self, point: VecF):
         return self.target.distance(point) <= self.radius
 
-    def update(self):
+    def update(self, delta):
         if self.radius == -1: return
 
-        self.radius += 1
+        self.radius += 30 * delta
         if self.radius > self.max_size:
             self.radius = -1
             self.alive = False
