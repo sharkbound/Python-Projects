@@ -19,7 +19,7 @@ class Game(Window):
         self.lines = ShapeElementList()
         for x in range(0, int(self.width), int(self.length)):
             for y in range(0, int(self.height), int(self.length)):
-                color_out = color.RED
+                color_out = color.RED_VIOLET
                 if random() < .5:
                     self.lines.append(create_line(x, y, x + self.length, y + self.length, color_out, 5))
                 else:
