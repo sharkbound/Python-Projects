@@ -1,9 +1,10 @@
-import sys
-from random import choice, randint, choices, randrange
-from typing import Optional, List, Any
+from random import choice, randint, randrange
+from random import choice, randint, randrange
+from typing import Optional, List
 
 from arcade import *
-from arcade import gui, key, color
+from arcade import color
+
 from missile import Missile
 from vecf import VecF
 
@@ -17,6 +18,7 @@ class MissileCommandGame(Window):
                  update_rate: Optional[float] = 1 / 60, antialiasing: bool = True):
         super().__init__(width, height, title, fullscreen, resizable, update_rate, antialiasing)
         self.missiles = []
+        self.delta = 0
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         super().on_mouse_press(x, y, button, modifiers)
@@ -27,7 +29,8 @@ class MissileCommandGame(Window):
         return Missile(VecF(randrange(self.width), 0), VecF(self._mouse_x, self._mouse_y), randint(30, 200), color=choice(ALL_COLORS))
 
     def on_update(self, delta_time: float):
-        super().on_update(delta_time)
+        self.delta = delta_time
+
         for missile in self.missiles:
             missile.update()
 
@@ -38,8 +41,7 @@ class MissileCommandGame(Window):
         start_render()
 
         for missile in self.missiles:
-            missile.on_draw()
-
+            missile.draw()
 
 MissileCommandGame()
 run()

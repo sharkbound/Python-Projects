@@ -1,11 +1,6 @@
-from typing import TYPE_CHECKING
-
-from arcade import draw_line, color, draw_circle_filled
+from arcade import color, draw_circle_filled
 
 from vecf import VecF
-
-if TYPE_CHECKING:
-    from run_missile_command import MissileCommandGame
 
 
 class Missile:
@@ -34,6 +29,6 @@ class Missile:
             self.radius = -1
             self.alive = False
 
-    def on_draw(self):
-        draw_line(*self.origin, *self.target, color=self.color)
+    def draw(self):
+        # draw_line(*self.origin, *self.target, color=self.color)
         draw_circle_filled(*self.target, self.radius, color=self.color)
