@@ -26,9 +26,10 @@ def show_memo(sender, data):
         get_data(ID.all_memo_data).append(memo_name)
 
     for item in (memo_name, text_id, save_and_close_id):
-        delete_item(item)
+        if does_item_exist(item):
+            delete_item(item)
 
-    delete_data(text_data_id)
+    add_data(text_data_id, memos[memo_name])
 
     if show:
         window_width = 400
@@ -50,6 +51,7 @@ def save_and_exit_clicked(sender: str, data):
 
 def listbox_clicked(sender, data):
     show_memo(sender, 'uselistbox')
+
 
 
 def main():
