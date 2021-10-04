@@ -11,23 +11,34 @@ class DotDict(dict):
     def _is_mutable_mapping(self, mapping):
         return isinstance(mapping, typing.MutableMapping) and type(mapping) is not type(self)
 
+    def _transform_if_mutable_mapping(self, value):
+        if self._is_mutable_mapping(value):
+            print(f'_transform_if_mutable_mapping -> {value}')
+            return type(self)(value)
+
+        return None
+
+    def _transform_if_mutable_sequence(self, value):
+        if isinstance(value, typing.MutableSequence):
+            print(f'_transform_if_mutable_sequence -> {value}')
+            return [
+                self._transform_if_mutable_mapping(subvalue)
+                or self._transform_if_mutable_sequence(subvalue)
+                or value
+
+                for i, subvalue in enumerate(value)
+            ]
+
+        return None
+
     def __getitem__(self, item):
         value = super().__getitem__(item)
 
-        if self._is_mutable_mapping(value):
-            value = DotDict(value)
-            self[item] = value
-
-            for key, subvalue in tuple(value.items()):
-                if self._is_mutable_mapping(subvalue):
-                    value[key] = type(self)(subvalue)
-
-        elif isinstance(value, typing.MutableSequence):
-            for index, item in enumerate(value):
-                if self._is_mutable_mapping(item):
-                    value[index] = DotDict(item)
-
-        return value
+        return (
+                self._transform_if_mutable_mapping(value)
+                or self._transform_if_mutable_sequence(value)
+                or value
+        )
 
     def __missing__(self, key):
         self[key] = self.__class__()
@@ -40,9 +51,5 @@ class DotDict(dict):
 if __name__ == '__main__':
     dot = DotDict()
     dot.value = {'subvalue': 'value'}
-    dot.list = [{'test': 'value'}]
-    print(dot)
-    print(dot.value)
-    print(dot)
-    print(dot.list)
-    print(dot)
+    dot.manylists = [[[[[{'text': 'convert me!', 'sublists2': [[[[[{'eversubber!': 'value!!'}]]]]]}]]]]]
+    print(dot.manylists)
