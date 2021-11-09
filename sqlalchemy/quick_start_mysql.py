@@ -1,39 +1,54 @@
-from contextlib import contextmanager
-
-from sqlalchemy import create_engine, orm, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine, orm, Column, Integer, String, Float, exists
+from contextlib import contextmanager
 
 # pip install mysql-connector-python
 # mysql+mysqlconnector://<user>:<password>@<host>[:<port>]/<dbname>
 #                             connector_to_use  user pass host      database
-engine = create_engine('mysql+mysqlconnector://root:password@localhost/python')
+engine = create_engine('mysql+mysqlconnector://user:password@localhost/<dbname>')
 Base = declarative_base(bind=engine)
 Session = orm.sessionmaker(bind=engine)
 
 
-def create_tables():
-    Base.metadata.create_all()
-
-
 @contextmanager
 def transaction():
-    session = Session()
-    yield session
-    session.commit()
-    session.close()
+    session: orm.Session = Session()
+    try:
+        yield session
+        session.commit()
+    except Exception as e:
+        session.rollback()
+    finally:
+        session.close()
 
 
-class Balance(Base):
-    __tablename__ = 'balance'
+class Account(Base):
+    __tablename__ = 'accounts'
 
-    id = Column(Integer, autoincrement=True, unique=True, nullable=False, primary_key=True)
-    name: str = Column(String, nullable=False)
-    bal: int = Column(Float, nullable=False, default=100)
+    id: int = Column(Integer, primary_key=True, nullable=False)
+    name: str = Column(String(50), nullable=False)
+    bal: int = Column(Integer, nullable=False, default=100)
+
+    def __str__(self):
+        return f'<{self.__class__.__name__} id={self.id} name={self.name!r} bal={self.bal}>'
 
 
-create_tables()
+def new_account(name, bal=100):
+    return Account(name=name, bal=bal)
 
-with transaction() as db:
-    b: Balance
-    for b in db.query(Balance):
-        print(b.id, b.name, b.bal)
+
+Base.metadata.create_all()
+
+with transaction() as s:
+    if not s.query(exists().where(Account.name == 'james')).scalar():
+        print('creating user...')
+        s.add(new_account('james'))
+    else:
+        print('user already exists')
+
+with transaction() as s:
+    for account in s.query(Account):
+        account.bal += 1
+
+with transaction() as s:
+    print('user:', s.query(Account).filter(Account.name == 'james').one())

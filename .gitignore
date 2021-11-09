@@ -50,17 +50,17 @@ __pycache__
 Network Trash Folder
 Temporary Items
 .apdisk
-DiscordBot/Config/bot_config.json
+discord_bot/Config/bot_config.json
 python csv/output.txt
-Polybius_Cypher/.idea/misc.xml
-Polybius_Cypher/.idea/modules.xml
-Polybius_Cypher/.idea/Polybius_Cypher.iml
-Polybius_Cypher/.idea/workspace.xml
-Snek/.idea/workspace.xml
-Snek/.idea/workspace.xml
+polybius_cypher/.idea/misc.xml
+polybius_cypher/.idea/modules.xml
+polybius_cypher/.idea/Polybius_Cypher.iml
+polybius_cypher/.idea/workspace.xml
+snek/.idea/workspace.xml
+snek/.idea/workspace.xml
 .idea/
-SharkFig/.idea/workspace.xml
-TwitchBot/Config/config.json
+sharkfig/.idea/workspace.xml
+twitchbot/Config/config.json
 *.pyc
 *.pyc
-PluginLoader/file.txt
+plugin_loader/file.txt

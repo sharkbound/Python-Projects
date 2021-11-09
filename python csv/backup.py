@@ -2,7 +2,7 @@ import csv
 import os
 from msvcrt import getch
 
-csv_path = "paypal.CSV"
+csv_path = "paypal.csv"
 output = "output.txt"
 
 class Donation:

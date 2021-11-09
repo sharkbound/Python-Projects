@@ -1,0 +1,9 @@
+pip: pip install --upgrade youtube-dl
+
+video & audio:
+	youtube-dl <URL>
+
+
+audio:
+	youtube-dl --extract-audio --audio-format mp3 <URL>
+	

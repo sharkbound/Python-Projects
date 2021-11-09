@@ -1,44 +1,45 @@
-from sqlalchemy import orm, create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
 from contextlib import contextmanager
 
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+# super class base for all table models
 Base = declarative_base()
-engine = create_engine('sqlite:///database.db', echo=False)
-Base.metadata.bind = engine
-Session = orm.sessionmaker(bind=engine)
-db: orm.Session = Session()
+
+# create a engine to execute sql queries
+engine = create_engine('sqlite:///:memory:')
+
+# session generator
+Session = sessionmaker(bind=engine)
 
 
-class User(Base):
-    __tablename__ = 'users'
+class Cookie(Base):
+    __tablename__ = 'cookies'
 
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String, nullable=False)
-    bal = Column(Integer, nullable=False, default=100)
-
-    def __str__(self):
-        return f'<User name={self.name!r} bal={self.bal}>'
+    id: int = Column(Integer, primary_key=True)
+    type: str = Column(String(255), nullable=False)
 
 
-def new_user(name):
-    return User(name=name)
+def init_tables():
+    # creates all tables for models, if they do not exist
+    Base.metadata.create_all()
 
 
-Base.metadata.create_all()
+init_tables()
 
 
 @contextmanager
 def transaction():
-    yield
-    db.commit()
+    s = Session()
+    try:
+        yield s
+        s.commit()
+    except:
+        s.rollback()
+    finally:
+        s.close()
 
 
-def get_user(name) -> User:
-    return db.query(User).filter(User.name == name).one_or_none()
-
-
-if not get_user('timmy'):
-    with transaction():
-        db.add(new_user('timmy'))
-
-print(get_user('timmy'))
+with transaction() as t:
+    t.add(Cookie(type='test'))
