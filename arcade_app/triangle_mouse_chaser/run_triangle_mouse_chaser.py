@@ -41,8 +41,7 @@ class MainView(arcade.View):
             self.points.append(Triangle(XY(x, y), XY(x, y), random_color(), 255))
             return
 
-        dist = 30
-        if abs(self.points[-1].p2.x - x) + abs(self.points[-1].p2.y - y) >= random.randint(10, 100):
+        if abs(self.points[-1].p2.x - x) + abs(self.points[-1].p2.y - y) >= random.randint(10, 200):
             self.points.append(Triangle(self.points[-1].p2, XY(x, y), random_color(), random.randrange(255)))
 
         for point_to_remove in [p for p in self.points if p.alpha <= 0]:
@@ -60,7 +59,6 @@ class MainView(arcade.View):
                                         tri.p2.x, tri.p2.y,
                                         self.window._mouse_x, self.window._mouse_y,
                                         tri.color_with_alpha)
-            # arcade.draw_line(tri.x, tri.y, self.window._mouse_x, self.window._mouse_y, tri.color_with_alpha)
 
 
 window = arcade.Window()
