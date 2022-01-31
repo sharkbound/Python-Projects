@@ -24,3 +24,13 @@ deactivate env:
 manages packages in activated env:
 	conda install/uninstall PACKAGE
 	(use pip if conda does not have it in its registry)
+
+
+create conda pypy environment:
+	https://conda-forge.org/blog/posts/2020-03-10-pypy/
+	https://stackoverflow.com/a/62173136
+
+	conda create -n <NAME>
+	conda activate  <NAME>
+	conda install -c conda-forge pypy3.X
+	# i think the -c is for the channel name
