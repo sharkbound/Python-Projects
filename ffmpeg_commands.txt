@@ -1,0 +1,38 @@
+extract mp3 from mp4:
+
+option 1:
+	link: https://stackoverflow.com/a/36324719
+
+	To encode a high quality MP3 or MP4 audio from a movie file (eg AVI, MP4, MOV, etc) or audio file (eg WAV), I find it's best to use -q:a 0 for variable bit rate and it's good practice to specify -map a to exclude video/subtitles and only grab audio:
+
+	ffmpeg -i sample.avi -q:a 0 -map a sample.mp3
+
+	If you want to extract a portion of audio from a video use the -ss option to specify the starting timestamp, and the -t option to specify the encoding duration, eg from 3 minutes and 5 seconds in for 45 seconds:
+
+	ffmpeg -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3
+
+	    The timestamps need to be in HH:MM:SS.xxx format or in seconds.
+
+	    If you don't specify the -t option it will go to the end.
+
+	    You can use the -to option instead of the -t option, if you want to specify the range, eg for 45 seconds: 00:03:05 + 45 = 00:03:50
+
+option 2:
+	link: https://stackoverflow.com/a/27413824
+	
+	To extract the audio stream without re-encoding:
+
+	ffmpeg -i input-video.avi -vn -acodec copy output-audio.aac
+
+	    -vn is no video.
+	    -acodec copy says use the same audio stream that's already in there.
+
+	Read the output to see what codec it is, to set the right filename extension.
+
+
+
+boost audio through filter:
+	ffmpeg -i sample.mp3 -filter:a "volume=5" sample.mp3
+
+
+	
